@@ -1,28 +1,34 @@
 console.log("T02 - Ejercicio 01");
 /*Desarrolla un script que pida 3 números reales al usuario y calcule su media aritmética 
 e indique la calificación del alumno usando la siguiente notación: 
-SUSPENSO (Menos de 5), APROBADO (entre 5 y 7), NOTABLE (entre 7 y 8.5), SOBRESALIENTE (entre 8,5 y 10).*/ 
-let notas = 0;  
-let calificacion = "";    
-for (let i=1; i<4; i++) {  
-    let nota = parseFloat(prompt(`Dame tu nota del trimestre ${i}`));
-    while (nota > 10 || nota < 0 || isNaN(nota)){
-        alert("Tu nota tiene que ser un número mayor de 1 y menor de 10");
+SUSPENSO (Menos de 5), APROBADO (entre 5 y 7), NOTABLE (entre 7 y 8.5), SOBRESALIENTE (entre 8,5 y 10).*/
+let sumaNotas = 0;
+let notaFinal;
+
+for (let i = 1; i <= 3; i++) {
+    let nota;
+    do {
         nota = parseFloat(prompt(`Dame tu nota del trimestre ${i}`));
-    }
-    notas+= nota;
+        if (nota > 10 || nota < 0 || isNaN(nota)) {
+            alert("Tu nota tiene que ser entre 0 y 10");
+        }
+    } while (nota > 10 || nota < 0 || isNaN(nota));
+    sumaNotas += nota;
 }
-let media = (notas)/3;
-if (media < 5){
-    calificacion = "SUSPENSO";
-} else if (media >= 5 && media < 7){
-    calificacion = "APROBADO";
-} else if (media >= 7 && media < 8.5){
-    calificacion = "NOTABLE";
-} else if (media >= 8.5 && media < 10){
-    calificacion = "SOBRESALIENTE";
+
+let media = sumaNotas / 3;
+
+if (media < 5) {
+    notaFinal = "SUSPENSO";
+} else if (media < 7) {
+    notaFinal = "APROBADO";
+} else if (media < 8.5) {
+    notaFinal = "NOTABLE";
+} else if (media <= 10) {
+    notaFinal = "SOBRESALIENTE";
 } else {
-    calificacion = "ERROR";
+    notaFinal = "ERROR";
 }
-alert(`Tu calificación final es: ${calificacion}`)
-console.log(calificacion)
+
+alert(`Tu calificación final es: ${notaFinal}`);
+console.log(notaFinal);

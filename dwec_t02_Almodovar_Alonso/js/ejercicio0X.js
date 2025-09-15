@@ -1,1 +1,1 @@
-console.log("T0X - Ejercicio 0X");
+console.log("T02 - Ejercicio 0X");
