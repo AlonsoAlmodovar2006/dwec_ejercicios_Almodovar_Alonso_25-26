@@ -1,4 +1,4 @@
-console.log("T0X - Ejercicio 0X");
+console.log("T02 - Ejercicio 08");
 /* Desarrolla un script que pida dos números enteros. 
 El programa determinará cuál es el menor y mostrará todos los número que hay entre ellos y cuantos hay. 
 El script tendrá una función para calcular cual es el menor de los dos: calcular_menor.
@@ -15,39 +15,29 @@ do {
     if (isNaN(numero2)) {
         alert("No has puesto un número");
     }
-} while (isNaN(numero1));
+} while (isNaN(numero2));
 
 let menor = calcular_menor(numero1,numero2);
-let mayor = !menor ? numero1 : numero2;
+let mayor = menor === numero1 ? numero2 : numero1;
+alert(`${menor} es el menor`);
+console.log(`${menor} es el menor`);
 console.log(mayor)
 let recorrido = [];
 
-for (i = menor; i < mayor; menor++){
+for (let i = menor+1; i < mayor; i++){
     recorrido.push(i);
 }
-console.table(recorrido)
+console.log(`Hay ${recorrido.length} números entre ${menor} y ${mayor}.`);
+alert(`Hay ${recorrido.length} números entre ${menor} y ${mayor}.`);
+console.table(recorrido);
 
 
 function calcular_menor(n1,n2){
-    let menor; 
-    let mayor;
     if (n1 > n2){
-        menor = n2;
-        mayor = n1;
-        alert(`${n2} es el menor`);
-        console.log(`${n2} es el menor`);
         return n2;
     } else if (n1 < n2){
-        menor = n1;
-        mayor = n2;
-        alert(`${n1} es el menor`);
-        console.log(`${n1} es el menor`);
         return n1;
     } else{
-        alert("Los dos números son iguales");
-        console.log("Los dos números son iguales");
-        menor = n1;
-        mayor = n2;
         return n1;
     }
 }

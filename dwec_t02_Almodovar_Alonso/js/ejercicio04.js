@@ -4,30 +4,28 @@ Antes de calcular, comprobar que el usuario introduce realmente un número (Numb
 let numero;
 
 do {
-    numero = parseInt(prompt("Introduce un número entero"));
+    numero = Number(prompt("Introduce un número entero"));
     if (!Number.isInteger(numero)) {
         alert("No has puesto un número entero");
     }
 } while (!Number.isInteger(numero));
 
 console.log(numero);
+let esPrimo = true;
 
 if (numero < 2) {
-    alert(`${numero} no es primo`);
-} else if (numero == 2) {
-    alert(`${numero} es primo`);
-} else if (numero % 2 == 0) {
-    alert(`${numero} no es primo`);
-} else {
-    let esPrimo = true;
-    for (let i = 3; i <= Math.sqrt(numero); i++) {
+    esPrimo = false;
+} else if (numero > 2 && numero % 2 == 0) {
+    esPrimo = false;
+} else if (numero > 2) {
+    for (let i = 3; i <= Math.sqrt(numero); i += 2) {
         if (numero % i == 0) {
             esPrimo = false;
         }
     }
-    if (esPrimo) {
-        alert(`${numero} es primo`);
-    } else {
-        alert(`${numero} no es primo`);
-    }
+}
+if (esPrimo) {
+    alert(`${numero} es primo`);
+} else {
+    alert(`${numero} no es primo`);
 }

@@ -18,13 +18,18 @@ do {
     if (isNaN(numero2)) {
         alert("No has puesto un número");
     }
-} while (isNaN(numero1));
+} while (isNaN(numero2));
 
 let resultado = 0;
-for (let i = 0; i < numero2; i++){
+for (let i = 0; i < Math.abs(numero2); i++){
     resultado += numero1;
+}
+
+if (numero2 < 0){
+    resultado = -resultado;
 }
 
 console.log(resultado);
 alert(resultado);
+
 
