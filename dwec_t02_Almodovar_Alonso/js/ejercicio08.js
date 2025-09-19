@@ -40,4 +40,6 @@ function calcular_menor(n1,n2){
     } else{
         return n1;
     }
+
+    // Solución más eficiente: return n1 < n2 ? n1 : n2;
 }

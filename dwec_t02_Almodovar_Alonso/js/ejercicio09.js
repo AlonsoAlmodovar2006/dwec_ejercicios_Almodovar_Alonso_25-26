@@ -16,7 +16,7 @@ do {
     }
 } while (isNaN(numero));
 
-
+// Se puede mejorar la lógica de pedirMenu para pedirlo menos veces
 let menu = pedirMenu();
 
 while (menu == 1 || menu == 2 || menu == 3) { 
@@ -35,7 +35,6 @@ while (menu == 1 || menu == 2 || menu == 3) {
             break;
         default:
             console.log("¿Qué ha pasado?");
-            break;
     }
 }
 
@@ -70,15 +69,13 @@ function multiplo5(numero) {
 }
 
 function pedirMenu() {
-    alert(
-    "Menú ---- 1. Calcular si es múltiplo de 2. 2. Calcular si es múltiplo de 3. 3. Calcular si es múltiplo de 5. 0. Salir");
+    alert("Menú \n---- \n1. Calcular si es múltiplo de 2. \n2. Calcular si es múltiplo de 3. \n3. Calcular si es múltiplo de 5. \n0. Salir");
     let menu;
     do {
-        menu = parseInt(prompt("Dame un número entre el 0 y 4 "));
-        if (isNaN(menu) || menu < 0 || menu > 4) {
-            alert("No has puesto un número entre 0 y 4");
-        } else {
-            return menu;
+        menu = parseInt(prompt("Dame un número entre el 0 y 3"));
+        if (isNaN(menu) || menu < 0 || menu > 3) {
+            alert("No has puesto un número entre 0 y 3");
         }
-    } while (isNaN(menu) || menu < 0 || menu > 4);
+    } while (isNaN(menu) || menu < 0 || menu > 3);
+    return menu;
 }

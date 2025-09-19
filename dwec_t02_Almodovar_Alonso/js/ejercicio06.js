@@ -7,29 +7,27 @@ let numero1;
 let numero2;
 
 do {
-    numero1 = parseInt(prompt("Introduce el primer número entero"));
+    numero1 = Number(prompt("Introduce el primer número entero"));
     if (isNaN(numero1)) {
         alert("No has puesto un número");
     }
-} while (isNaN(numero1));
+} while (!Number.isInteger(numero1));
 
 do {
-    numero2 = parseInt(prompt("Introduce el segundo número entero"));
+    numero2 = Number(prompt("Introduce el segundo número entero"));
     if (isNaN(numero2)) {
         alert("No has puesto un número");
     }
-} while (isNaN(numero2));
+} while (!Number.isInteger(numero1));
 
 let resultado = 0;
-for (let i = 0; i < Math.abs(numero2); i++){
+for (let i = 0; i < Math.abs(numero2); i++) {
     resultado += numero1;
 }
 
-if (numero2 < 0){
+if (numero2 < 0) {
     resultado = -resultado;
 }
 
 console.log(resultado);
 alert(resultado);
-
-
