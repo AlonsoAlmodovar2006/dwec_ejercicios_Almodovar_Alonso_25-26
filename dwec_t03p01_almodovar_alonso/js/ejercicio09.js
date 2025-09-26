@@ -18,7 +18,7 @@ for (let i = 0; i < nNumeros; i++) {
             alert("No es un número válido. Inténtalo de nuevo.");
         }
     } while (isNaN(consola));
-    arrayNumeros[i] = consola;
+    arrayNumeros.push(consola);
 }
 alert(`El número menor de los que has puesto es: ${Math.min(...arrayNumeros)}`);
 console.log(`El número menor de los que has puesto es: ${Math.min(...arrayNumeros)}`)
