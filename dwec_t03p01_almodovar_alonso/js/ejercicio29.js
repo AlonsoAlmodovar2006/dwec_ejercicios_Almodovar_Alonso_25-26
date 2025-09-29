@@ -1,1 +1,0 @@
-console.log("T03 - Ejercicio 0X");
