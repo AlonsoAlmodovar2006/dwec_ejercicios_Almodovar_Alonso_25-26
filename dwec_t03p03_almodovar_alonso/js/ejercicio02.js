@@ -10,11 +10,19 @@ Después el script le pedirá números al usuario uno a uno y los almacenará en
 -    	mostrarArray() => Recibe: array. Devuelve: nada.
 -      mostrarArrayOrdenado() => Recibe: array. Devuelve: nada. */
 const arrayNumeros = pedirDatos();
+
+mostrarArray(arrayNumeros);
+
 let media = calcularMedia(arrayNumeros);
+console.log(`La media de tu array es: ${media}`);
+alert(`La media de tu array es: ${media}`);
+
 let superiores = calcularSuperioresMedia(arrayNumeros, media);
-let orden = "asc"
+console.log(`Estos son los números superiores a la media de tu array: ${superiores}`);
+alert(`Estos son los números superiores a la media de tu array: ${superiores}`);
+
+let orden = "asc";
 const arrayOrdenado = ordenarArray(arrayNumeros,orden)
-mostrarArray(arrayNumeros)
 mostrarArrayOrdenado(arrayOrdenado)
 
 function pedirDatos() {
