@@ -17,13 +17,14 @@ let media = calcularMedia(arrayNumeros);
 console.log(`La media de tu array es: ${media}`);
 alert(`La media de tu array es: ${media}`);
 
-let superiores = calcularSuperioresMedia(arrayNumeros, media);
+const superiores = calcularSuperioresMedia(arrayNumeros, media);
 console.log(`Estos son los números superiores a la media de tu array: ${superiores}`);
 alert(`Estos son los números superiores a la media de tu array: ${superiores}`);
 
 let orden = "asc";
-const arrayOrdenado = ordenarArray(arrayNumeros,orden)
-mostrarArrayOrdenado(arrayOrdenado)
+let arrayOrdenado = ordenarArray(arrayNumeros, orden);
+mostrarArrayOrdenado(arrayOrdenado);
+
 
 function pedirDatos() {
     let nNumeros;
@@ -51,52 +52,52 @@ function calcularMedia(array) {
     return suma / array.length;
 }
 
-function calcularSuperioresMedia(array,media){
+function calcularSuperioresMedia(array, media) {
     let miArray = [];
-    array.forEach(element => {
-        if (element > media){
-            miArray.push(element)
+    array.forEach((element) => {
+        if (element > media) {
+            miArray.push(element);
         }
     });
     return miArray;
 }
 
-function ordenarArray(array,orden){
-    if (orden == "asc"){
-        for (let i = 1; i<array.length; i++){
+function ordenarArray(array, orden) {
+    if (orden == "asc") {
+        for (let i = 1; i < array.length; i++) {
             let key = array[i];
-            let j = i - 1
-            while (j >= 0 && array[j] > key){
-                array[j+1] = array[j]
-                j = j-1
+            let j = i - 1;
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j = j - 1;
             }
-            array[j+1] = key
+            array[j + 1] = key;
         }
-        return array
-    } else if (orden == "desc"){
-        for (let i = 1; i<array.length; i++){
+        return array;
+    } else if (orden == "desc") {
+        for (let i = 1; i < array.length; i++) {
             let key = array[i];
-            let j = i - 1
-            while (j >= 0 && array[j] < key){
-                array[j+1] = array[j]
-                j = j-1
+            let j = i - 1;
+            while (j >= 0 && array[j] < key) {
+                array[j + 1] = array[j];
+                j = j - 1;
             }
-            array[j+1] = key
+            array[j + 1] = key;
         }
-        return array
-    } else{
+        return array;
+    } else {
         console.log("¿Qué ha pasado? Orden no debería de valer eso");
         alert("¿Qué ha pasado? Orden no debería de valer eso");
     }
 }
 
-function mostrarArray(array){
+function mostrarArray(array) {
     let frase = "Este es el array --> [" + array + "]";
     alert(frase);
     console.log(frase);
 }
 
-function mostrarArrayOrdenado(array){
+function mostrarArrayOrdenado(array) {
     let frase = "Este es el array ordenado --> [" + array + "]";
     alert(frase);
     console.log(frase);

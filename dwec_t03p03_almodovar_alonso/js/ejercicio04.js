@@ -1,7 +1,7 @@
 console.log("T03 - Ejercicio 04");
 /* Desarrolla un script que ordene un array de cadenas alfabéticamente usando un método del objeto Array que permite hacerlo de forma directa. 
 Se pueden ordenar de forma ascendente o descendente a decisión del usuario. */
-const miArray = ["Alonso", "victor", "Alberto", "mikel", "Mari Carmen"];
+const miArray = ["Alonso", "Victor", "Alberto", "Mikel", "Mari Carmen"];
 let tipo = "";
 let mensaje = "¿Cómo quieres ordenar este array --> \n["+ miArray + "] \nde forma ascendente o descendente? (asc o desc)"
 do {
@@ -12,9 +12,9 @@ do {
 }while (tipo != "asc" && tipo != "desc")
 
 if (tipo == "asc") {
-    miArray.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    miArray.sort()
 } else {
-    miArray.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    miArray.sort()
     miArray.reverse();
 }
 
