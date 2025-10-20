@@ -241,7 +241,7 @@ function pasarADone(categoria, numeros) {
         const indiceStr = arrayNumeros[i];
         const indiceTarea = parseInt(indiceStr.trim());
 
-        if (!isNan(indiceTarea) && indiceTarea > 0 && indiceTarea < categoria.length) {
+        if (!isNaN(indiceTarea) && indiceTarea > 0 && indiceTarea < categoria.length) {
             if (categoria[indiceTarea][1] !== "done") {
                 categoria[indiceTarea][1] = "done";
                 console.log(`Tarea ${indiceTarea} ("${categoria[indiceTarea][0]}") marcada como completada.`);
