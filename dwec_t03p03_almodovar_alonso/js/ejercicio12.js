@@ -61,30 +61,42 @@ function listarCategoria(matriz) {
 }
 
 function categoriaSeleccionada(menu, matriz) {
-    const array = matriz[menu - 1];
-    let menu2;
+    const categoriaActual = matriz[menu - 1];
+    let seleccionUsuario;
     do {
-        let mensaje = `Menú 3. Categoría ${array[0]}\n======\n`;
+        let mensaje = `Menú 3. Categoría ${categoriaActual[0]}\n======\n`;
         let indice = 0;
-        for (let i = 1; i < array.length; i++) {
-            mensaje += `    ${++indice}. ` + array[i][0] + ` (${array[i][1]})\n`;
+        for (let i = 1; i < categoriaActual.length; i++) {
+            mensaje += `    ${++indice}. ` + categoriaActual[i][0] + ` (${categoriaActual[i][1]})\n`;
         }
         mensaje += `    ${++indice}. Añadir nueva tarea\n    ${++indice}. Borrar tarea\n    ${++indice}. Atrás`;
 
-        menu2 = validarMenu(mensaje, 1, indice);
-
-        if (menu2 < array.length) {
-            pasarADone(matriz, menu2);
-        } else if (menu2 == array.length) {
-            addTarea(array);
-        } else if (menu2 == array.length + 1) {
-            borrarTarea(array);
-        } else if (menu2 == array.length + 2) {
-            console.log("¡Adiós!");
+        seleccionUsuario = validarEntradaString(mensaje);
+        // validarMenu(mensaje, 1, indice); 
+        if (seleccionUsuario.includes(",")) {
+            pasarADone(categoriaActual, seleccionUsuario)
         } else {
-            console.log(`¿Qué ha pasado? La variable no debería de valer ${menu2}`);
+            const opcionNumerica = parseInt(seleccionUsuario);
+            const min = 1;
+            const max = categoriaActual.length + 2;
+
+            if (!Number.isInteger(opcionNumerica) || opcionNumerica < min || opcionNumerica > max) {
+                console.log(`El número tiene que ser entero en el intervalo del ${min} al ${max}`);
+            } else {
+                if (seleccionUsuario < categoriaActual.length) {
+                    pasarADone(categoriaActual, opcionNumerica.toString());
+                } else if (seleccionUsuario == categoriaActual.length) {
+                    addTarea(categoriaActual);
+                } else if (seleccionUsuario == categoriaActual.length + 1) {
+                    borrarTarea(categoriaActual);
+                } else if (seleccionUsuario == categoriaActual.length + 2) {
+                    console.log("¡Adiós!");
+                } else {
+                    console.log(`¿Qué ha pasado? La variable no debería de valer ${seleccionUsuario}`);
+                }
+            }
         }
-    } while (menu2 != array.length + 2);
+    } while (parseInt(seleccionUsuario) != categoriaActual.length + 2);
 
     listarCategoria(matriz);
 }
@@ -223,13 +235,21 @@ function borrarTarea(categoria) {
     }
 }
 
-function pasarADone(matriz, numeros) {
-    console.log(numeros);
-    const arrayNumeros = parseInt(numeros.split(","));
-
+function pasarADone(categoria, numeros) {
+    const arrayNumeros = numeros.split(",");
     for (let i = 0; i < arrayNumeros.length; i++) {
-        if (matriz[arrayNumeros[i]][1] != "done") {
-            matriz[arrayNumeros[i]][1] = "done";
+        const indiceStr = arrayNumeros[i];
+        const indiceTarea = parseInt(indiceStr.trim());
+
+        if (!isNan(indiceTarea) && indiceTarea > 0 && indiceTarea < categoria.length) {
+            if (categoria[indiceTarea][1] !== "done") {
+                categoria[indiceTarea][1] = "done";
+                console.log(`Tarea ${indiceTarea} ("${categoria[indiceTarea][0]}") marcada como completada.`);
+            } else {
+                console.log(`La tarea ${indiceTarea} ya estaba completada.`);
+            }
+        } else {
+            console.log(`El número de tarea '${indiceStr}' no es válido.`);
         }
     }
 }
