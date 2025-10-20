@@ -72,7 +72,6 @@ function categoriaSeleccionada(menu, matriz) {
         mensaje += `    ${++indice}. Añadir nueva tarea\n    ${++indice}. Borrar tarea\n    ${++indice}. Atrás`;
 
         seleccionUsuario = validarEntradaString(mensaje);
-        // validarMenu(mensaje, 1, indice); 
         if (seleccionUsuario.includes(",")) {
             pasarADone(categoriaActual, seleccionUsuario)
         } else {
