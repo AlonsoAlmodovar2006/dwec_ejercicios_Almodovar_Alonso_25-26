@@ -3,7 +3,7 @@ console.log("T03 - Ejercicio 12");
 const setEstados = new Set(["toDo", "done"]);
 // [Categoría [nombreTarea, estado]]
 // const arrayCategorias = [["compra"], ["libro", ["leer", "done"], ["escribir", "toDo"]]];
-// const arrayCategorias = [];
+const arrayCategorias = [];
 
 if (arrayCategorias.length == 0) {
     addPrimeraCategoria(arrayCategorias);
