@@ -77,6 +77,22 @@ Object.defineProperty(Aula.prototype, "curso", {
     },
 });
 
+Aula.defineProperty(Aula, "nombreGrupos", {
+    value: new Set(["Grupo 1", "Grupo 2", "Grupo 3", "Grupo 4", "Grupo 5", "Grupo 6", "Grupo 7", "Grupo 8", "Grupo 9", "Grupo 10"]),
+})
+
+Aula.prototype.insertarGrupos = function () {
+    const nombresGrupos = []
+    for (const nombre of this.nombreGrupos){
+        nombresGrupos.push(nombre)
+    }
+    const grupos = new Map();
+    for (let i = 0; i < nombresGrupos.length; i++){
+        grupos.set(nombresGrupos[i], [])
+    }
+    return grupos;
+}
+
 Aula.prototype.haySitioAlumnos = function () {
     return this.nAlumnos < this.nMaxAlumnos;
 };
@@ -106,7 +122,7 @@ Aula.prototype.pedirDatosUnAlumno = function () {
         let notaTrim = validarNumeroConLimites(
             `Dame la nota del Trimestre ${i + 1} de ${nombre}`,
             0,
-            10
+            10.01
         );
         notasTrimestres.push(notaTrim);
     }
@@ -131,14 +147,14 @@ Aula.prototype.pedirDatos = function () {
             const alumno = this.pedirDatosUnAlumno();
             arrayAlumnos.push(alumno);
         }
-    }else {
-        console.log("No hay suficiente espacio en el aula para añadir tantos alumnos. Repítelo")
+    } else {
+        console.log("No hay suficiente espacio en el aula para añadir tantos alumnos")
     }
     return arrayAlumnos;
 };
 
 Aula.prototype.insertarAlumnos = function (array) {
-    if (array.length < this.obtenerSitiosAlumnos()) {
+    if (array.length <= this.obtenerSitiosAlumnos()) {
         array.forEach((alumno) => {
             this.alumnos.push(alumno);
         });
@@ -147,10 +163,9 @@ Aula.prototype.insertarAlumnos = function (array) {
 
 Aula.prototype.mostrarDatos = function () {
     let mensaje =
-        "Estos son los alumnos que pertenecen al aula " + this.id + "\n=====\n";
+        "Estos son los alumnos que pertenecen al aula " + this.id + "\n=====";
     this.alumnos.forEach((alumno) => {
-        mensaje += `- ${alumno.nombre} ('${alumno.sexo}'), con DNI ${alumno.dni}, nacido el ${alumno.fechaNacimiento}, que tiene ${alumno.edad} años, ha sacado un ${alumno.notaFinal} de media. 
-La nota de sus trimestres, ordenados, respectivamente, ha sido de: (${alumno.notaTrim1}, ${alumno.notaTrim2}, ${alumno.notaTrim3})\n\n`;
+        mensaje += alumno.mostrarInformacion() + `\n`;
     });
     console.log(mensaje);
 };
@@ -161,23 +176,25 @@ Aula.prototype.mediasNota = function () {
         mediaAlumnos += alumno.notaFinal;
     });
     let mediaClase = mediaAlumnos / this.nAlumnos;
-    return mediaClase;
+    return mediaClase.toFixed(2);
 };
 
 Aula.prototype.mejorNota = function () {
-    let mejorNota = [];
+    let mejorNota = 0;
+    const matriculasHonor = [];
     if (this.alumnos.length > 0) {
-        mejorNota = [this.alumnos[0]];
-        for (let i = 1; i < this.nAlumnos; i++) {
-            if (mejorNota[0].notaFinal === this.alumnos[i].notaFinal) {
-                mejorNota.push(this.alumnos[i]);
-            } else if (mejorNota[0].notaFinal < this.alumnos[i].notaFinal) {
-                mejorNota.length = 0;
-                mejorNota.push(this.alumnos[i]);
+        this.alumnos.forEach(alumno => {
+            if (alumno.notaFinal > mejorNota) {
+                mejorNota = alumno.notaFinal;
+            }
+        });
+        for (let i = 0; i < this.nAlumnos; i++) {
+            if (mejorNota === this.alumnos[i].notaFinal) {
+                matriculasHonor.push(this.alumnos[i])
             }
         }
     }
-    return mejorNota;
+    return matriculasHonor;
 };
 
 Aula.prototype.porcentajeSuspensos = function () {
@@ -246,14 +263,14 @@ function validarNumeroConLimites(mensaje, min, max) {
         numero = parseFloat(prompt(mensaje));
         if (isNaN(numero) || numero < min || numero > max) {
             console.log(
-                `El número tiene que ser entero positivo en el intervalo del ${min} al ${max}`
+                `El número tiene que ser positivo en el intervalo del ${min} al ${max}`
             );
             esValido = false;
         } else {
             esValido = true;
         }
     } while (!esValido);
-    return parseFloat(numero.toFixed(2));
+    return numero;
 }
 
 function validarNumero(mensaje) {
@@ -261,7 +278,7 @@ function validarNumero(mensaje) {
     let numero;
     do {
         numero = parseInt(prompt(mensaje));
-        if (!Number.isInteger(numero) || numero < 0 ) {
+        if (!Number.isInteger(numero) || numero < 0) {
             console.log(`El número tiene que ser entero positivo`);
             esValido = false;
         } else {

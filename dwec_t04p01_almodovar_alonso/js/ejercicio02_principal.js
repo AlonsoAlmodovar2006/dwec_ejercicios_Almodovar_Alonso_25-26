@@ -1,8 +1,10 @@
 function functionPrueba1() {
     const yo = new Alumno("71371662V", "Alonso Almodóvar Delgado", "09-10-2006", 9.76, 7.66, 8.75, 'h')
     const alterEgo = new Alumno("71371663H", "Alonso Almotróvar Del faro", "09-01-1996", 6.79, 6.67, 5.78, 'm')
-    yo.mostrarInformacion();
-    alterEgo.mostrarInformacion();
+    let mensaje1 = yo.mostrarInformacion();
+    console.log(mensaje1)
+    let mensaje2 = alterEgo.mostrarInformacion();
+    console.log(mensaje2)
     const resultado = yo.comparar(alterEgo)
     switch (resultado) {
         case 1:
@@ -21,18 +23,19 @@ function functionPrueba1() {
     } else {
         console.log("Suspenso. A recuperar")
     }
-    alterEgo.mostrarInformacion();
-}
+    let mensaje3 = alterEgo.mostrarInformacion();
+    console.log(mensaje3)
+} 
 
 function funcionPrueba2() {
-    let nMaxAlumnos = validarNumeroConLimites("Dame el número máximo de alumnos que pueden caber en esta clase", 1, 900);
+    let nMaxAlumnos = validarNumberConLimites("Dame el número máximo de alumnos que pueden caber en esta clase", 1, 900);
     const aula = new Aula(nMaxAlumnos, 1, "A113", 2);
     let cabecera = `--- GESTIÓN DEL AULA "${aula.descripcion}" (Curso: ${aula.curso}º) ---\n`;
-    let opciones = "Menú Aula \n=====\n1. Matricular nuevos alumnos \n2. Mostrar todos los alumnos del aula \n3. Calcular la nota media del aula \n4. Encontrar alumno/s con la mejor nota \n5. Ver estadísticas de Aprobados/Suspensos \n6. Salir"
+    let opciones = "Menú Aula \n=====\n1. Matricular nuevos alumnos \n2. Mostrar todos los alumnos del aula \n3. Calcular la nota media del aula \n4. Encontrar alumno/s con la mejor nota \n5. Ver estadísticas de Aprobados/Suspensos \n6. Grupos Aulas \n7. Salir"
     let mensaje = cabecera + opciones;
     let menu;
     do {
-        menu = validarNumeroConLimites(mensaje, 1, 6);
+        menu = validarNumberConLimites(mensaje, 1, 6);
         switch (menu) {
             case 1:
                 const alumnosAnadidos = aula.pedirDatos()
@@ -43,11 +46,15 @@ function funcionPrueba2() {
                 break;
             case 3:
                 let mediaClase = aula.mediasNota()
-                console.log(mediaClase);
+                console.log("La nota media del aula es --> " + mediaClase);
                 break;
             case 4:
                 const alumnosNota = aula.mejorNota();
-                console.log(alumnosNota);
+                let mensaje = "La mejor nota de la clase la tienen: "
+                for (let i = 0; i < alumnosNota.length; i++) {
+                    mensaje += "\n - " + alumnosNota[i].nombre;
+                }
+                console.log(mensaje);
                 break;
             case 5:
                 let porcentaje = aula.mostrarSuspensosAprobados();
@@ -62,10 +69,14 @@ function funcionPrueba2() {
     } while (menu != 6)
 }
 
-functionPrueba1();
+function funcionPrueba2ampliado(){
+
+}
+
+// functionPrueba1();
 funcionPrueba2();
 
-function validarNumeroConLimites(mensaje, min, max) {
+function validarNumberConLimites(mensaje, min, max) {
     let esValido = true;
     let menu;
     do {
@@ -79,13 +90,3 @@ function validarNumeroConLimites(mensaje, min, max) {
     } while (!esValido);
     return menu
 }
-
-/* const yo = new Alumno("71371662V", "Alonso Almodóvar Delgado", "09-10-2006", 9.76, 7.66, 8.75, 'h')
-    const alterEgo = new Alumno("71371663H", "Alonso Almotróvar Del faro", "09-01-1996", 6.79, 6.67, 5.78, 'm')
-    const cagadovar = new Alumno("71371662V", "Alonso Cagadovar Delgado", "09-10-2006", 3,4,2, 'h')
-    const arrayAlumnos = [yo, alterEgo, cagadovar];
-    
-    aula.insertarAlumnos(arrayAlumnos)
-    aula.mostrarDatos()
-    const alumnos = aula.mostrarSuspensosAprobados()
-    console.log(alumnos) */

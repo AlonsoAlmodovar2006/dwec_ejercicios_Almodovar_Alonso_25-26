@@ -15,7 +15,7 @@ function Alumno(dni, nombre, fechaNacimiento, notaTrim1, notaTrim2, notaTrim3, s
         let mes = miFecha.getMonth() + 1 - arrayFecha[1];
         let year = miFecha.getFullYear() - arrayFecha[2];
 
-        if (mes < 0 || dia < 0) {
+        if (mes < 0 || mes < 0 && dia < 0) {
             year--;
         }
 
@@ -63,8 +63,9 @@ function Alumno(dni, nombre, fechaNacimiento, notaTrim1, notaTrim2, notaTrim3, s
     }
 
     this.mostrarInformacion = function () {
-        console.log(`\n${this.nombre} ('${this.sexo}'), con DNI ${this.dni}, nacido el ${this.fechaNacimiento}, que tiene ${this.edad} años, ha sacado un ${this.notaFinal} de media. 
-La nota de sus trimestres, ordenados, respectivamente, ha sido de: (${this.notaTrim1}, ${this.notaTrim2}, ${this.notaTrim3})`);
+        let mensaje = `\n${this.nombre} ('${this.sexo}'), con DNI ${this.dni}, nacido el ${this.fechaNacimiento}, que tiene ${this.edad} años, ha sacado un ${this.notaFinal} de media. 
+La nota de sus trimestres, ordenados, respectivamente, ha sido de: (${this.notaTrim1}, ${this.notaTrim2}, ${this.notaTrim3})`
+        return mensaje;
     };
 }
 
@@ -133,7 +134,7 @@ Object.defineProperty(Alumno.prototype, "notaTrim1", {
         return this._notaTrim1;
     },
     set: function (value) {
-        if (!isNaN(value) && value < 10 && value > 0) {
+        if (!isNaN(value) && value <= 10 && value > 0) {
             this._notaTrim1 = value
         } else {
             console.log("La nota del Trimestre 1 está mal formada. Tiene que ser un número menor de 10 y con decimales");
@@ -147,7 +148,7 @@ Object.defineProperty(Alumno.prototype, "notaTrim2", {
         return this._notaTrim2;
     },
     set: function (value) {
-        if (!isNaN(value) && value < 10 && value > 0) {
+        if (!isNaN(value) && value <= 10 && value > 0) {
             this._notaTrim2 = value
         } else {
             console.log("La nota del Trimestre 2 está mal formada. Tiene que ser un número menor de 10 y con decimales");
@@ -161,7 +162,7 @@ Object.defineProperty(Alumno.prototype, "notaTrim3", {
         return this._notaTrim3;
     },
     set: function (value) {
-        if (!isNaN(value) && value < 10 && value > 0) {
+        if (!isNaN(value) && value <= 10 && value > 0) {
             this._notaTrim3 = value
         } else {
             console.log("La nota del Trimestre 3 está mal formada. Tiene que ser un número menor de 10 y con decimales");
@@ -186,7 +187,7 @@ Object.defineProperty(Alumno.prototype, "sexo", {
     get: function () {
         return this._sexo;
     },
-    /* set: function (value) {
+    set: function (value) {
         const valor = value.toLowerCase();
         if (valor === "h" || valor === "m" || valor === "o") {
             this._sexo = valor;
@@ -194,16 +195,19 @@ Object.defineProperty(Alumno.prototype, "sexo", {
             console.log("El sexo sólo puede ser 'h', 'm' u 'o'");
             this._sexo = "ERROR";
         }
-    }*/
+    }
 });
 
-/* const yo = new Alumno(
-    "71371622V",
-    "Alonso Almodóvar Delgado",
-    "09-10-2006",
-    9.01,
-    7.66,
-    8.75,
-    "h"
-);
-yo.mostrarInformacion(); */
+Alumno.defineProperty("grupo", {
+    get: function () {
+        return this._grupo;
+    },
+    set: function (value) {
+        if (!isNaN(value) && value >= 1 && value <= 400) {
+            this._grupo = value;
+        } else {
+            console.log("Intervalo de grupo erróneo");
+            this._grupo = "ERROR";
+        }
+    },
+})
