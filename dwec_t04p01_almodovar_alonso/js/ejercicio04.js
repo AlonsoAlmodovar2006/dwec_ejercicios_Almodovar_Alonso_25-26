@@ -155,17 +155,19 @@ let personajes = [
 ];
 
 /* Usa el método "filter" para conseguir todos los datos de los personajes de "Marvel". */
-const marvel = personajes.filter(filtrarEditorial);
-function filtrarEditorial(personaje) {
-    return personaje.editorial == "Marvel"
+const marvel = []
+for (let i= 0; i < personajes.length; i++){
+    if (personajes[i].editorial == "Marvel"){
+        marvel.push(personajes[i])
+    }
 }
-console.log("\nPersonajes de Marvel \n------");
-console.log(marvel)
+console.log(`\nPersonajes de Marvel \n------`);
+console.log(marvel);
 
 /* Usa el método "filter" para conseguir todos los datos de los personajes mayores de 1000 años. */
 const ancianos = personajes.filter(filtrarEdad)
 function filtrarEdad(personaje) {
-    return personaje.edad > 1000
+    return personajes.edad > 1000
 }
 console.log(`\nPersonajes de +1000 años \n------`);
 console.log(ancianos);
