@@ -181,7 +181,7 @@ class Tienda {
             const primerAutor = this.pedirYCrearAutor();
             autor.push(primerAutor);
         } else {
-            autor.push(this.autores.buscarAutorPorID(numAutor));
+            autor.push(this.autores.buscarAutoresPorID(numAutor));
         }
         const precio = this.lector.leerRealHasta(`Dame el precio de ${titulo}`);
         const tipo = this.lector.leerEnteroEntreHasta("Elige el tipo de libro que es: \n=====\n 1. Ebook\n 2. Libro de Papel", 1, 2);

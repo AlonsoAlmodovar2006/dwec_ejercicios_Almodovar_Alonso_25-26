@@ -44,19 +44,20 @@ class Pedidos {
         }
     }
 
-    // No sé como plantear esta clase
-    borrarPedidos(pedidosAborrar) {
-        // const miPedido = this.buscarPedidoPorId(pedidosAborrar);
-        // if (miPedido != null) {
-        //     const pedidoIndex = this.listadoPedidos.findIndex((pedido) => pedido.id = pedidosAborrar);
-        //     this.listadoPedidos.splice(miPedido, 1);
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+    borrarPedidos(pedidosAborrar) { // ¿Se tienen que borrar todos a la vez?
+        let todosBorrados = true;
+        for (const idABorrar of pedidosAborrar) {
+            const indice = this.listadoPedidos.findIndex(pedido => pedido.id === idABorrar);
+            if (indice !== -1) {
+                this.listadoPedidos.splice(indice, 1);
+            } else {
+                todosBorrados = false;
+            }
+        }
+        return todosBorrados;
     }
 
-    // No se pueden modificar los clientes
+    // No se pueden modificar los Pedidos
 
     // Aquellos otros métodos que considere necesarios
 }

@@ -1,8 +1,10 @@
+console.log("T04 - Ejercicio 01 - Tipo Envío");
+
 class TipoEnvio {
     #nombre;
     #maxDias;
     #maxPeso;
-    #precio;
+    #precio; // Sin IVA
 
     constructor (nom, dias, peso, prec) {
         this.nombre = nom;
@@ -52,7 +54,7 @@ class TipoEnvio {
     }
 
     mostrarDatosTipoEnvio() {
-        return `Tipo Envío ${this.nombre}: ${this.maxDias}, ${this.maxPeso}, ${this.precio} €`;
+        return `(Tipo Envío) - Nombre: ${this.nombre} | Máximo Días: ${this.maxDias} | Máximo Peso: ${this.maxPeso} | Precio: ${this.precio} €`;
     }
 
     // Aquellos métodos que consideres necesarios.

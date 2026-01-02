@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01");
+console.log("T04 - Ejercicio 01 - Tipos Envíos");
 class TiposEnvios {
     #listadoTiposEnvios;
 
@@ -35,15 +35,16 @@ class TiposEnvios {
         }
     }
 
-    // No se pueden modificar ni borrar los tipos
+    // No se pueden modificar los tipos.
 
-    obtenerCadenaLibrosMenu() {
+    // No se pueden borrar tipos.
+
+    obtenerCadenaTiposMenu() {
         let mensaje = "TODOS LOS TIPOS DE ENVÍO REGISTRADOS EN LA TIENDA\n=====\n";
         let contador = 0;
-        // Tendría que ordenar solo si no está ordenado
-        this.listadoTiposEnvios.sort(function (a, b) { return b.precio - a.precio });
-        for (const tipos of this.listadoTiposEnvios) {
-            mensaje += ++contador + ". " + tipos.nombre + `(${tipos.precio} €)\n`;
+        this.listadoTiposEnvios.sort(function (a, b) { return b.precio - a.precio }); // Tendría que ordenar solo si no está ordenado
+        for (const envio of this.listadoTiposEnvios) {
+            mensaje += ++contador + ". " + envio.nombre + `(${envio.precio} €)\n`;
         }
         return mensaje;
     }

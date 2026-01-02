@@ -1,4 +1,4 @@
-console.log("T04  Ejercicio 01");
+console.log("T04 - Ejercicio 01 - Principal");
 
 document.addEventListener('DOMContentLoaded', () => {
     const boton = document.getElementById('btn-comprar');
@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         main();
     });
 });
-
-//Lee sobre la diferencia entre DOMContentLoaded y windows.onload
 
 function main() {
     try {

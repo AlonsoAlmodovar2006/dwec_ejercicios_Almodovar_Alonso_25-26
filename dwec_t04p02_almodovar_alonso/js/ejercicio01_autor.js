@@ -1,8 +1,9 @@
-console.log("T04 - Ejercicio 01");
+console.log("T04 - Ejercicio 01 - Autor");
+
 class Autor {
-    #id; // único e incrementado internamente
-    #nombre; // Nombre y Apellidos
-    #libros; // Array de objetos con sus libros
+    #id; // único e Incrementado Internamente
+    #nombre; // Nombre Completo
+    #libros; // Array de Objetos Libro
 
     static ultimoId = 0;
 
@@ -36,7 +37,11 @@ class Autor {
     }
 
     mostrarDatosAutor() {
-        return `Autor (${this.id}): ${this.nombre}, ${this.libros} `;
+        let tituloLibros = "";
+        for (const elLibro of this.libros) {
+            tituloLibros += elLibro.titulo + " - ";
+        }
+        return `(Autor) ${this.id} - Nombre: ${this.nombre} | Libros: ${tituloLibros} `;
     }
 
     insertarLibro(libro) {

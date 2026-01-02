@@ -1,3 +1,5 @@
+console.log("T04 - Ejercicio 01 - Libros");
+
 class Libros {
     #listadoLibros;
 
@@ -59,8 +61,7 @@ class Libros {
         let mensaje = "TODOS LOS LIBROS DE LA TIENDA\n=====\n";
         let contador = 0;
         let tipoLibro = "??";
-        // Tendría que ordenar solo si no está ordenado
-        this.listadoLibros.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        this.listadoLibros.sort((a, b) => a.titulo.localeCompare(b.titulo)); // Tendría que ordenar solo si no está ordenado
         for (const libro of this.listadoLibros) {
             if (libro instanceof Ebook) {
                 tipoLibro = "Ebook";
@@ -72,7 +73,7 @@ class Libros {
         return mensaje;
     }
 
-    // Aquellos otros métodos que considere necesarios
+    // Aquellos otros métodos que consideres necesarios
     tamanoListaLibros() {
         return this.listadoLibros.length;
     }

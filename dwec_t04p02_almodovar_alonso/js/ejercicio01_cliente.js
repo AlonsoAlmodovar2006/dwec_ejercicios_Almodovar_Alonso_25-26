@@ -1,6 +1,8 @@
+console.log("T04 - Ejercicio 01 - Cliente");
+
 class Cliente {
     #dni;
-    #nombre;
+    #nombre; // Nombre Completo
     #direccion;
     #listaPedidos; // Array de Objetos Pedido
 
@@ -36,7 +38,7 @@ class Cliente {
     }
     set direccion(valor) {
         if (!Util.validarEntrada(valor)) {
-            throw new Error("direccion Inválido");
+            throw new Error("Dirección Inválida");
         }
         this.#direccion = valor;
     }
@@ -52,11 +54,17 @@ class Cliente {
     }
 
     mostrarDatosCliente() {
-        return `Cliente (${this.dni}): ${this.nombre}, ${this.direccion}, ${this.listaPedidos} `;
+        return `(Cliente) ${this.dni} - Nombre: ${this.nombre} | Dirección: ${this.direccion} | Número Pedidos: ${this.listaPedidos.length} `;
     }
 
     mostrarPedidosClienteAbierto() {
-        return ``
+        let mensaje = `PEDIDOS ABIERTOS DEL CLIENTE ${this.dni} \n`;
+        for (const pedido of this.listaPedidos) {
+            if (pedido.abierto){
+                mensaje += pedido.mostrarDatosPedido() + "\n";
+            }
+        }
+        return mensaje;
     }
 
     insertarPedidoCliente(pedidoAInsertar) {

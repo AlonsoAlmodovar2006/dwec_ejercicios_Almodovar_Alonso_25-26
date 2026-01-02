@@ -1,12 +1,14 @@
+console.log("T04 - Ejercicio 01 - Pedido");
+
 class Pedido {
     #id;
     #cliente; // Objeto Cliente
-    #librosPedido; // Mapa con isbn del libro pedido y el número de unidades. Solo puede ser 1 si es Ebook. El pedido puede contener tanto libros de tipo Ebook como LibroPapel.
+    #librosPedido; // Mapa con el Objeto del Libro/s Pedido/s y el nº de unidades (Solo puede ser 1 si es Ebook) El pedido puede contener tanto libros de tipo Ebook como LibroPapel.
     #fecha;
-    #tipoEnvioPedido; // Objeto tipo Envío
+    #tipoEnvioPedido; // Objeto tipoEnvío
     #precioTotalSinEnvioSinIVA; // Coste total de los libros
     #precioTotalConEnvioSinIVA; // precioTotalSinEnvioSinIVA + coste del envío
-    #precioTotalConEnvioConIVA; // precioTotalConEnvioSinIVA + iva
+    #precioTotalConEnvioConIVA; // precioTotalConEnvioSinIVA + IVA
     #descuento;
     #abierto;
 
@@ -58,7 +60,7 @@ class Pedido {
         return this.#fecha;
     }
     set fecha(valor) {
-        if (!Util.validarFecha(valor)) {
+        if (!Util.validarConvertirFecha(valor)) {
             throw new Error("Fecha Inválido");
         }
         this.#fecha = valor;
@@ -128,15 +130,21 @@ class Pedido {
         return this.librosPedido.size > 0;
     }
 
-    mostrarDatosPedido() {
-        /*  Devuelve una cadena con toda la información de un pedido, detallando los libros (ebooks y en papel), el tipo de envío y los costes finales. No recibe nada. */
+    mostrarDatosPedido(catalogoLibro) {
+        let tablaLibros = "";
+        this.librosPedido.forEach((item) => {
+            const tipo = (item.libro instanceof Ebook) ? "Ebook" : "Papel";
+            tablaLibros += `\n    - (${tipo}) ${item.libro.titulo} x${item.unidades}`;
+        });
+        const envioStr = this.tipoEnvioPedido ? this.tipoEnvioPedido.nombre : "Sin envío";
+        return `(Pedido) ${this.id} - ${this.cliente.nombre} | Libros Pedidos: ${tablaLibros} | Fecha: ${this.fecha} | ${envioStr} | Precio Libros: ${this.precioTotalSinEnvioSinIVA.toFixed(2)}€ | Precio Libros con Envío: ${this.precioTotalConEnvioSinIVA.toFixed(2)}€ | Precio Total: ${this.precioTotalConEnvioConIVA.toFixed(2)}€ | Descuento: ${this.descuento * 100}% | ${this.abierto ? "Abierto" : "Cerrado"} `;
     }
 
     insertarLibro(libro, unidades) {
         const unidadesFinal = libro instanceof Ebook ? 1 : unidades;
         this.librosPedido.set(libro.isbn, { libro: libro, unidades: unidadesFinal });
         let totalUnidades = 0;
-        for (const item of this.librosPedido.values()) {
+        for (let item of this.librosPedido.values()) {
             totalUnidades += item.unidades;
         }
         return totalUnidades;
@@ -147,7 +155,7 @@ class Pedido {
         if (this.hayLibros()) {
             let soloEbooks = true;
             let pesoTotal = 0;
-            for (const item of this.librosPedido.values()) {
+            for (let item of this.librosPedido.values()) {
                 if (item.libro instanceof LibroPapel) {
                     soloEbooks = false;
                     pesoTotal += (item.libro.peso * item.unidades);
@@ -162,36 +170,40 @@ class Pedido {
     }
 
     calcularTotal() {
-        if (this.hayLibros() && this.tipoEnvioPedido != null) {
-            let descuentoFinal = 0;
+        let costeEnvio = 0;
+        let costeTotalLibros = 0;
+        if (this.hayLibros()) {
+            let descuentoMes = 0;
             if (this.fecha.getMonth() == 10 || this.fecha.getMonth() == 11) {
-                descuentoFinal = 0.1;
+                descuentoMes = 0.1;
             }
-            let costeEnvio = 0;
-            let costeTotalLibros = 0;
             let hayLibroPapel = false;
             for (const item of this.librosPedido.values()) {
-                const precioUnitario = item.libro.precio - (item.libro.precio * descuentoFinal);
+                const precioUnitario = item.libro.precio - (item.libro.precio * descuentoMes);
                 costeTotalLibros += (precioUnitario * item.unidades);
                 if (item.libro instanceof LibroPapel) {
                     hayLibroPapel = true;
                 }
             }
-            if (hayLibroPapel) {
+            if (hayLibroPapel && this.tipoEnvioPedido !== null) {
                 costeEnvio = this.tipoEnvioPedido.precio;
             }
-            this.precioTotalSinEnvioSinIVA = costeTotalLibros;
-            this.precioTotalConEnvioSinIVA = costeTotalLibros + costeEnvio;
-            this.precioTotalConEnvioConIVA = costeTotalLibros + costeEnvio + ((costeTotalLibros + costeEnvio) * Tienda.IVA);
         }
+        this.precioTotalSinEnvioSinIVA = costeTotalLibros;
+        this.precioTotalConEnvioSinIVA = costeTotalLibros + costeEnvio;
+        this.precioTotalConEnvioConIVA = costeTotalLibros + costeEnvio + ((costeTotalLibros + costeEnvio) * Tienda.IVA);
     }
 
     aplicarDescuento(porcentaje) {
-        if (this.hayLibros() && this.tipoEnvioPedido != null && porcentaje < 1) {
-            let costeEnvio = this.precioTotalConEnvioSinIVA - this.precioTotalSinEnvioSinIVA; //La diferencia entre uno y otro es el coste de envío
-            this.precioTotalSinEnvioSinIVA = this.precioTotalSinEnvioSinIVA - (this.precioTotalSinEnvioSinIVA * porcentaje);
+        let costeEnvio = 0;
+        if (this.hayLibros() && porcentaje < 1 && porcentaje > 0) {
+            this.descuento = porcentaje;
+            if (this.tipoEnvioPedido !== null) {
+                costeEnvio = this.tipoEnvioPedido.precio
+            }
+            this.precioTotalSinEnvioSinIVA = this.precioTotalSinEnvioSinIVA - (this.precioTotalSinEnvioSinIVA * this.descuento);
             this.precioTotalConEnvioSinIVA = this.precioTotalSinEnvioSinIVA + costeEnvio;
-            this.precioTotalConEnvioConIVA = this.precioTotalConEnvioConIVA + (this.precioTotalConEnvioConIVA * Tienda.IVA);
+            this.precioTotalConEnvioConIVA = this.precioTotalConEnvioSinIVA + (this.precioTotalConEnvioSinIVA * Tienda.IVA);
             return true;
         } else {
             return false;

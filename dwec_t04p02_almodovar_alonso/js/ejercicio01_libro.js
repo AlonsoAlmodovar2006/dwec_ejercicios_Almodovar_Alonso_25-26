@@ -1,10 +1,12 @@
-console.log("T04 - Ejercicio 01");
+console.log("T04 - Ejercicio 01 - Libro");
+
 class Libro {
     #isbn;
     #titulo;
     #generoLiterario;
     #autor; // Array de Objetos Autor
     #precio; // Sin IVA
+    // Otras Propiedades
     #precioOriginal;
 
     static GENEROS_LITERARIOS = new Set([
@@ -80,15 +82,21 @@ class Libro {
     }
 
     mostrarDatosLibro() {
-        return `Libro ${this.isbn}: ${this.titulo}, ${this.generoLiterario}, ${this.autor.nombre}, ${this.precio} €`;
+        let nombresAutores = "";
+        for (const elAutor of this.autor) {
+            nombresAutores += elAutor.nombre + "  ";
+        }
+        return `ISBN: ${this.isbn} | Título: ${this.titulo} | Género: ${this.generoLiterario} | Autores: ${nombresAutores} | Precio: ${this.precio.toFixed(2)}€`
     }
 
     aplicarDescuentoLibro(descuento) {
+        if (descuento < 0 || descuento > 1) throw new Error("Descuento erróneo");
         if (this.#precioOriginal != null) {
             this.deshacerDescuentoLibro();
         }
         this.#precioOriginal = this.precio;
-        this.precio = this.precio - this.precio * (descuento / 100);
+        let nuevoPrecio = this.precio - (this.precio * descuento);
+        this.precio = Number(nuevoPrecio.toFixed(2))
     }
 
     deshacerDescuentoLibro() {
@@ -98,7 +106,11 @@ class Libro {
         }
     }
 
-    // Algún otro método necesario
+    // Otros métodos que consideres necesarios y sean comunes a los hijos e idénticos.
+    static listaGeneros() {
+        return [...Libro.GENEROS_LITERARIOS];
+    }
+    // Clase inservible en otro contexto 
     static leerGenerosLiterarios() {
         let mensaje = "";
         let contador = 0;
@@ -110,7 +122,7 @@ class Libro {
 }
 
 class Ebook extends Libro {
-    #tamanoArchivo; //en MiB
+    #tamanoArchivo; // MiB
     #formato;
 
     static FORMATOS = new Set(["pdf", "epub", "mobi"]);
@@ -150,14 +162,15 @@ class Ebook extends Libro {
     }
 
     mostrarDatosLibro() {
-        return `Libro Ebook.${this.formato} ${this.isbn}: ${this.titulo}, ${this.autor.nombre}. ${this.generoLiterario}, ${this.precio} €, ${this.tamanoArchivo} MiB`;
+        return "(Ebook)" + super.mostrarDatosLibro() + ` | Tamaño: ${this.tamanoArchivo} MiB | Formato: ${this.formato}`;
     }
 
+    // Métodos Comunes
     comprobarDisponibilidad() {
         return true;
     }
 
-    modificarLibro(mapaInfo) {
+    modificarLibro(mapaInfo) { // Posible clase con fallos
         for (const [clave, valor] of mapaInfo) {
             if (clave == "isbn") {
                 continue;
@@ -168,7 +181,11 @@ class Ebook extends Libro {
         }
     }
 
-    // Algún otro método necesario
+    // Aquellos otros métodos que consideres necesarios
+    static listaFormatos() {
+        return [...Libro.GENEROS_LITERARIOS];
+    }
+    // Clase inservible en otro contexto 
     static leerFormatos() {
         let mensaje = "";
         let contador = 0;
@@ -240,14 +257,15 @@ class LibroPapel extends Libro {
     }
 
     mostrarDatosLibro() {
-        return `Libro en Papel ${this.isbn}: ${this.titulo}, ${this.autor.nombre}. ${this.generoLiterario}, ${this.precio} €. ${this.dimensiones}, ${this.peso} g. Quedan ${this.stock}`;
+        return "(Papel)" + super.mostrarDatosLibro() + ` | Dimensiones: ${this.dimensiones} | Peso: ${this.peso} g | Stock: ${this.stock}`;
     }
 
+    // Métodos Comunes
     comprobarDisponibilidad() {
         return this.stock > 0;
     }
 
-    modificarLibro(mapaInfo) {
+    modificarLibro(mapaInfo) { // Posible clase con fallos
         for (const [clave, valor] of mapaInfo) {
             if (clave == "isbn") {
                 continue;

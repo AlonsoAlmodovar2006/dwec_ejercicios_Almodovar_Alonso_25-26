@@ -1,3 +1,5 @@
+console.log("T04 - Ejercicio 01 - Leer Datos");
+
 class LeerDatos {
     leerEntero(mensaje_o_id) {
         throw new Error("Método no implementado");
@@ -31,18 +33,15 @@ class LeerDatos {
 class LeerDatosPrompt extends LeerDatos {
     leerEntero(mensaje_o_id) {
         const entrada = prompt(mensaje_o_id);
-
         if (!Util.validarEntero(entrada)) {
             throw new Error("El valor introducido no es un número entero");
         }
-
         return Number(entrada);
     }
 
     leerEnteroHasta(mensaje_o_id) {
         let numero = -1;
         let esValido = false;
-
         while (!esValido) {
             try {
                 numero = this.leerEntero(mensaje_o_id);
@@ -51,24 +50,20 @@ class LeerDatosPrompt extends LeerDatos {
                 console.error("Entrada inválida: " + error.message);
             }
         }
-
         return numero;
     }
 
     leerReal(mensaje_o_id) {
         const entrada = prompt(mensaje_o_id);
-
         if (!Util.validarReal(entrada)) {
             throw new Error("El valor introducido no es un número real");
         }
-
         return entrada;
     }
 
     leerRealHasta(mensaje_o_id) {
         let numero = -1;
         let esValido = false;
-
         while (!esValido) {
             try {
                 numero = this.leerReal(mensaje_o_id);
@@ -77,25 +72,20 @@ class LeerDatosPrompt extends LeerDatos {
                 console.error("Entrada inválida: " + error.message);
             }
         }
-
         return numero;
     }
 
-
     leerEnteroEntre(mensaje_o_id, min, max) {
         const entrada = prompt(mensaje_o_id);
-
         if (!Util.validarEntero(entrada) || entrada < min || entrada > max) {
             throw new Error("El valor no está entre el intervalo establecido");
         }
-
         return entrada;
     }
 
     leerEnteroEntreHasta(mensaje_o_id, min, max) {
         let numero;
         let esValido = false;
-
         while (!esValido) {
             try {
                 numero = this.leerEnteroEntre(mensaje_o_id, min, max);
@@ -104,7 +94,6 @@ class LeerDatosPrompt extends LeerDatos {
                 console.error("Entrada inválida: " + error.message);
             }
         }
-
         return numero;
     }
 
@@ -139,7 +128,6 @@ class LeerDatosPrompt extends LeerDatos {
     leerCadenaHasta(mensaje_o_id, longitud, patron) {
         let esValido = false;
         let entrada = "";
-
         while (!esValido) {
             try {
                 switch (arguments.length) {
@@ -164,4 +152,6 @@ class LeerDatosPrompt extends LeerDatos {
         }
         return entrada;
     }
+
+    // Aquellos otros métodos que consideres necesarios
 }
