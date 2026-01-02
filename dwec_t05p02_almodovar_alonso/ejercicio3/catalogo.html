@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC - Ejercicios T05 - Alonso Almodóvar</title>
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="css/micss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
+        <header class="d-flex align-items-center py-3 mb-3 border-bottom">
+            <i class="bi bi-bootstrap fs-3 me-2"></i>
+            <span class="fs-4">Librería Almodóvar</span>
+        </header>
+    </div>
+
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <ul class="navbar-nav flex-row w-100 text-center">
+                <li class="nav-item w-25">
+                    <a class="nav-link py-3 fw-semibold" href="catalogo.html">Catálogo</a>
+                </li>
+                <li class="nav-item w-25">
+                    <a class="nav-link py-3 fw-semibold" href="cliente.html">Cliente</a>
+                </li>
+                <li class="nav-item w-25">
+                    <a class="nav-link py-3 fw-semibold" href="libro.html">Libro</a>
+                </li>
+                <li class="nav-item w-25">
+                    <a class="nav-link py-3 fw-semibold" href="pedido.html">Pedido</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container mt-2">
+        <main class="flex-grow-1">
+            <form>
+                <div class="input-group">
+                    <input type="search" name="buscar" id="buscar" class="form-control"
+                        placeholder="Buscar por título, género o autor">
+                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+            <table class="table table-striped mt-1">
+                <thead>
+                    <tr>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">9788432226895</th>
+                        <td>La sombra del viento</td>
+                        <td>Carlos Ruiz Zafón</td>
+                        <td>Novela</td>
+                        <td>19,95 €</td>
+                        <td>Libro Papel</td>
+                        <td>12</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9788401021513</th>
+                        <td>El nombre del viento</td>
+                        <td>Patrick Rothfuss</td>
+                        <td>Fantasía</td>
+                        <td>22,90 €</td>
+                        <td>Libro Papel</td>
+                        <td>8</td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                            <!-- Ventana modal con todos los datos del libro y su tipo -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+
+    <div class="container">
+        <footer class="bg-body-tertiary mt-auto d-flex justify-content-between align-items-center py-3 border-top">
+            <p class="mb-0 text-body-secondary">© 2025 Desarrollo en Cliente, Alonso Almodóvar</p>
+        </footer>
+    </div>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="js/ejercicio01_libros.js"></script>
+    <script src="js/ejercicio01_autores.js"></script>
+    <script src="js/ejercicio01_tiposEnvios.js"></script>
+    <script src="js/ejercicio01_clientes.js"></script>
+    <script src="js/ejercicio01_pedidos.js"></script>
+    <script src="js/ejercicio01_libro.js"></script>
+    <script src="js/ejercicio01_cliente.js"></script>
+    <script src="js/ejercicio01_leer_datos.js"></script>
+    <script src="js/ejercicio01_autor.js"></script>
+    <script src="js/ejercicio01_pedido.js"></script>
+    <script src="js/ejercicio01_tipoEnvio.js"></script>
+    <script src="js/ejercicio01_util.js"></script>
+    <script src="js/ejercicio01_tienda.js"></script>
+    <script src="js/ejercicio01_principal.js"></script>
+    <script src="js/ejercicio01.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
