@@ -5,130 +5,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DWEC - Ejercicios T05 - Alonso Almodóvar</title>
-    <!-- Enlace al archivo CSS -->
+
+    <!-- CSS propio -->
     <link rel="stylesheet" href="css/micss.css">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <div class="container">
-        <header class="d-flex align-items-center py-3 mb-3 border-bottom">
-            <i class="bi bi-bootstrap fs-3 me-2"></i>
-            <span class="fs-4">Librería Almodóvar</span>
-        </header>
+<body class="bg-light d-flex flex-column min-vh-100">
 
-    </div>
+    <!-- HEADER -->
+    <header class="bg-white border-bottom">
+        <div class="container">
+            <div class="d-flex align-items-center py-3">
+                <i class="bi bi-book-half fs-2 me-2 text-primary"></i>
+                <span class="fs-4 fw-semibold">Librería Almodóvar</span>
+            </div>
+        </div>
+    </header>
 
-    <div class="container">
-        <nav class="navbar navbar-light bg-light">
-            <ul class="navbar-nav flex-row w-100 text-center">
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="catalogo.html">Catálogo</a>
+    <!-- NAVBAR 4 COLUMNAS -->
+    <nav class="bg-primary">
+        <div class="container-fluid px-0">
+            <ul class="nav nav-pills nav-fill text-center">
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="catalogo.html">
+                        <i class="bi bi-journal-bookmark me-1"></i> Catálogo
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="cliente.html">Cliente</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white active" href="cliente.html">
+                        <i class="bi bi-people me-1"></i> Cliente
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="libro.html">Libro</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="libro.html">
+                        <i class="bi bi-book me-1"></i> Libro
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="pedido.html">Pedido</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="pedido.html">
+                        <i class="bi bi-cart me-1"></i> Pedido
+                    </a>
                 </li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    </nav>
 
-    <div class="container mt-2">
-        <main class="flex-grow-1">
-            <form action="">
-                <div class="row mb-3">
-                    <label for="dni" class="col-sm-2 col-form-label">DNI</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="dni" id="dni">
+    <!-- MAIN -->
+    <main class="container my-4 flex-grow-1">
+
+        <!-- FORMULARIO CLIENTE -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white fw-semibold">
+                Nuevo cliente
+            </div>
+            <div class="card-body">
+                <form class="needs-validation" novalidate>
+                    <div class="row mb-3">
+                        <label for="dni" class="col-md-2 col-form-label">DNI</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="dni" id="dni" required>
+                            <div class="invalid-feedback">
+                                El DNI es obligatorio
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="nombre" id="nombre">
+
+                    <div class="row mb-3">
+                        <label for="nombre" class="col-md-2 col-form-label">Nombre</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="nombre" id="nombre" required>
+                            <div class="invalid-feedback">
+                                El nombre es obligatorio
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="direccion" id="direccion">
+
+                    <div class="row mb-3">
+                        <label for="direccion" class="col-md-2 col-form-label">Dirección</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="direccion" id="direccion" required>
+                            <div class="invalid-feedback">
+                                La dirección es obligatoria
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Nuevo</button>
-            </form>
-            <div class="row">
-                <div class="col-8">
-                    <table class="table table-striped mt-1">
-                        <thead>
-                            <tr>
-                                <th scope="col">DNI</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Dirección</th>
-                                <th scope="col">Pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">9788432226895</th>
-                                <td>La sombra del viento</td>
-                                <td>Carlos Ruiz Zafón</td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Ver</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9788401021513</th>
-                                <td>El nombre del viento</td>
-                                <td>Patrick Rothfuss</td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">
-                                        Ver
-                                    </a>
-                                    <!-- Ventana modal con todos los datos del libro y su tipo -->
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-4">
-                    <p>Cards</p>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-person-plus me-1"></i> Nuevo
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- LISTADO + CARDS -->
+        <div class="row g-4">
+
+            <!-- TABLA CLIENTES -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header fw-semibold">
+                        Clientes registrados
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>DNI</th>
+                                        <th>Nombre</th>
+                                        <th>Dirección</th>
+                                        <th class="text-center">Pedido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12345678A</td>
+                                        <td>Juan Pérez</td>
+                                        <td>Calle Mayor 10</td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                                Ver
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>87654321B</td>
+                                        <td>Ana Gómez</td>
+                                        <td>Avenida del Sol 5</td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                                Ver
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </main>
-    </div>
 
-    <div class="container">
-        <footer class="bg-body-tertiary mt-auto d-flex justify-content-between align-items-center py-3 border-top">
-            <p class="mb-0 text-body-secondary">© 2025 Desarrollo en Cliente, Alonso Almodóvar</p>
-        </footer>
-    </div>
+            <!-- COLUMNA DERECHA / CARDS -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="card-title">Pedidos activos</h6>
+                        <p class="card-text text-muted">
+                            Selecciona un cliente para ver sus pedidos asociados.
+                        </p>
+                    </div>
+                </div>
 
-    <!-- Enlace al archivo JavaScript -->
-    <script src="js/ejercicio01_libros.js"></script>
-    <script src="js/ejercicio01_autores.js"></script>
-    <script src="js/ejercicio01_tiposEnvios.js"></script>
-    <script src="js/ejercicio01_clientes.js"></script>
-    <script src="js/ejercicio01_pedidos.js"></script>
-    <script src="js/ejercicio01_libro.js"></script>
-    <script src="js/ejercicio01_cliente.js"></script>
-    <script src="js/ejercicio01_leer_datos.js"></script>
-    <script src="js/ejercicio01_autor.js"></script>
-    <script src="js/ejercicio01_pedido.js"></script>
-    <script src="js/ejercicio01_tipoEnvio.js"></script>
-    <script src="js/ejercicio01_util.js"></script>
-    <script src="js/ejercicio01_tienda.js"></script>
-    <script src="js/ejercicio01_principal.js"></script>
-    <script src="js/ejercicio01.js"></script>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-title">Acciones rápidas</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li><i class="bi bi-plus-circle me-1"></i> Nuevo pedido</li>
+                            <li><i class="bi bi-search me-1"></i> Buscar cliente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-top mt-auto">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <p class="mb-0 text-body-secondary">
+                    © 2025 Desarrollo en Cliente · Alonso Almodóvar
+                </p>
+                <i class="bi bi-bootstrap fs-4 text-primary"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS del proyecto -->
+    <script src="js/_libros.js"></script>
+    <script src="js/_autores.js"></script>
+    <script src="js/_tiposEnvios.js"></script>
+    <script src="js/_clientes.js"></script>
+    <script src="js/_pedidos.js"></script>
+    <script src="js/_libro.js"></script>
+    <script src="js/_cliente.js"></script>
+    <script src="js/_leer_datos.js"></script>
+    <script src="js/_autor.js"></script>
+    <script src="js/_pedido.js"></script>
+    <script src="js/_tipoEnvio.js"></script>
+    <script src="js/_util.js"></script>
+    <script src="js/_tienda.js"></script>
+    <script src="js/_principal.js"></script>
+    <script src="js/pagCliente.js"></script>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-</body>
 
+    <!-- Validación Bootstrap -->
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+
+</body>
 </html>

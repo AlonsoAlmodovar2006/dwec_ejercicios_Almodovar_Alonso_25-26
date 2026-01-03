@@ -1,0 +1,246 @@
+console.log("T04 - Ejercicio 01 - Leer Datos");
+
+class LeerDatos {
+    leerEntero(mensaje_o_id) {
+        throw new Error("Método no implementado");
+    }
+
+    leerEnteroHasta(mensaje_o_id) {
+        throw new Error("Método no implementado");
+    }
+
+    leerReal(mensaje_o_id) {
+        throw new Error("Método no implementado");
+    }
+
+    leerRealHasta(mensaje_o_id) {
+        throw new Error("Método no implementado");
+    }
+
+    leerEnteroEntre(mensaje_o_id, min, max) {
+        throw new Error("Método no implementado");
+    }
+
+    leerEnteroEntreHasta(mensaje_o_id, min, max) {
+        throw new Error("Método no implementado");
+    }
+
+    leerCadena(mensaje_o_id, longitud, patron) {
+        throw new Error("Método no implementado");
+    }
+
+    leerCadenaHasta(mensaje_o_id, longitud, patron) {
+        throw new Error("Método no implementado");
+    }
+}
+
+class LeerDatosPrompt extends LeerDatos {
+    leerEntero(mensaje_o_id) {
+        const entrada = prompt(mensaje_o_id);
+        if (!Util.validarEntero(entrada)) {
+            throw new Error("El valor introducido no es un número entero");
+        }
+        return Number(entrada);
+    }
+
+    leerEnteroHasta(mensaje_o_id) {
+        let numero = -1;
+        let esValido = false;
+        while (!esValido) {
+            try {
+                numero = this.leerEntero(mensaje_o_id);
+                esValido = true;
+            } catch (error) {
+                console.error("Entrada inválida: " + error.message);
+            }
+        }
+        return numero;
+    }
+
+    leerReal(mensaje_o_id) {
+        const entrada = prompt(mensaje_o_id);
+        if (!Util.validarReal(entrada)) {
+            throw new Error("El valor introducido no es un número real");
+        }
+        return entrada;
+    }
+
+    leerRealHasta(mensaje_o_id) {
+        let numero = -1;
+        let esValido = false;
+        while (!esValido) {
+            try {
+                numero = this.leerReal(mensaje_o_id);
+                esValido = true;
+            } catch (error) {
+                console.error("Entrada inválida: " + error.message);
+            }
+        }
+        return numero;
+    }
+
+    leerEnteroEntre(mensaje_o_id, min, max) {
+        const entrada = prompt(mensaje_o_id);
+        if (!Util.validarEntero(entrada) || entrada < min || entrada > max) {
+            throw new Error("El valor no está entre el intervalo establecido");
+        }
+        return entrada;
+    }
+
+    leerEnteroEntreHasta(mensaje_o_id, min, max) {
+        let numero;
+        let esValido = false;
+        while (!esValido) {
+            try {
+                numero = this.leerEnteroEntre(mensaje_o_id, min, max);
+                esValido = true;
+            } catch (error) {
+                console.error("Entrada inválida: " + error.message);
+            }
+        }
+        return numero;
+    }
+
+    leerCadena(mensaje_o_id, longitud, patron) {
+        switch (arguments.length) {
+            case 1:
+                const entrada1 = prompt(mensaje_o_id);
+                if (!Util.validarEntrada(entrada1)) {
+                    throw new Error("No has introducido ningún valor");
+                }
+                return entrada1;
+            case 2:
+                const entrada2 = prompt(mensaje_o_id);
+                if (!Util.validarEntrada(entrada2, longitud)) /* entrada2.trim() === "" */ {
+                    throw new Error("La cadena que has introducido no entra dentro de la longitud");
+                }
+                return entrada2;
+            case 3:
+                const entrada3 = prompt(mensaje_o_id);
+                if (!Util.validarEntrada(entrada3, longitud)) {
+                    throw new Error("La cadena que has introducido no entra dentro de la longitud");
+                }
+                if (!patron.test(mensaje_o_id)) {
+                    throw new Error("La cadena que has introducido no pasa el patrón");
+                }
+                return entrada3;
+            default:
+                throw new Error("No debería haber pasado esto");
+        }
+    }
+
+    leerCadenaHasta(mensaje_o_id, longitud, patron) {
+        let esValido = false;
+        let entrada = "";
+        while (!esValido) {
+            try {
+                switch (arguments.length) {
+                    case 1:
+                        entrada = this.leerCadena(mensaje_o_id);
+                        esValido = true;
+                        break;
+                    case 2:
+                        entrada = this.leerCadena(mensaje_o_id, longitud);
+                        esValido = true;
+                        break;
+                    case 3:
+                        entrada = this.leerCadena(mensaje_o_id, longitud, patron);
+                        esValido = true;
+                        break;
+                    default:
+                        throw new Error("No debería haber pasado esto");
+                }
+            } catch (error) {
+                console.error("Entrada inválida: " + error.message);
+            }
+        }
+        return entrada;
+    }
+
+    // Aquellos otros métodos que consideres necesarios
+}
+
+class LeerDatosForm extends LeerDatos {
+    #obtenerValor(id) {
+        const elemento = document.getElementById(id);
+        if (!elemento) {
+            throw new Error(`El elemento HTML con id '${id}' no existe.`);
+        }
+        return elemento.value;
+    }
+
+    leerEntero(id) {
+        const entrada = this.#obtenerValor(id);
+        if (!Util.validarEntero(entrada)) {
+            throw new Error("El valor introducido no es un número entero");
+        }
+        return Number(entrada);
+    }
+
+    leerEnteroHasta(id) {
+        return this.leerEntero(id);
+    }
+
+    leerReal(id) {
+        const entrada = this.#obtenerValor(id);
+        if (!Util.validarReal(entrada)) {
+            throw new Error("El valor introducido no es un número real");
+        }
+        return entrada;
+    }
+
+    leerRealHasta(id) {
+        return this.leerReal(id);
+    }
+
+    leerEnteroEntre(id, min, max) {
+        const entrada = this.leerEntero(id);
+        if (entrada < min || entrada > max) {
+            throw new Error("El valor no está entre el intervalo establecido");
+        }
+        return entrada;
+    }
+
+    leerEnteroEntreHasta(id, min, max) {
+        return this.leerEnteroEntre(id, min, max);
+    }
+
+    leerCadena(id, longitud, patron) {
+        const entrada = this.#obtenerValor(id);
+
+        if (arguments.length >= 1) {
+            if (!Util.validarEntrada(entrada)) {
+                throw new Error("No has introducido ningún valor");
+            }
+        }
+
+        if (arguments.length >= 2) {
+            if (entrada.length > longitud) {
+                throw new Error("La cadena que has introducido no entra dentro de la longitud");
+            }
+        }
+
+        if (arguments.length === 3) {
+            if (!Util.validarEntrada(entrada, longitud)) {
+                throw new Error("La cadena que has introducido no entra dentro de la longitud");
+            }
+            if (!patron.test(id)) {
+                throw new Error("La cadena que has introducido no pasa el patrón");
+            }
+        }
+
+        return entrada;
+    }
+
+    leerCadenaHasta(id, longitud, patron) {
+        return this.leerCadena(id, longitud, patron);
+    }
+
+    leerBooleano(id) {
+        const elemento = document.getElementById(id);
+        if (elemento.type === "checkbox") {
+            return elemento.checked;
+        }
+        return elemento.value === "true";
+    }
+}

@@ -2,123 +2,182 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DWEC - Ejercicios T05 - Alonso Almodóvar</title>
-    <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="css/micss.css">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="css/micss.css" />
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <div class="container">
-        <header class="d-flex align-items-center py-3 mb-3 border-bottom">
-            <i class="bi bi-bootstrap fs-3 me-2"></i>
-            <span class="fs-4">Librería Almodóvar</span>
-        </header>
-    </div>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <!-- HEADER -->
+    <header class="bg-white border-bottom">
+        <div class="container">
+            <div class="d-flex align-items-center py-3">
+                <i class="bi bi-book-half fs-2 me-2 text-primary"></i>
+                <span class="fs-4 fw-semibold">Librería Almodóvar</span>
+            </div>
+        </div>
+    </header>
 
-    <div class="container">
-        <nav class="navbar navbar-light bg-light">
-            <ul class="navbar-nav flex-row w-100 text-center">
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="catalogo.html">Catálogo</a>
+    <!-- NAVBAR 4 COLUMNAS -->
+    <nav class="bg-primary">
+        <div class="container-fluid px-0">
+            <ul class="nav nav-pills nav-fill text-center">
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white active" href="catalogo.html">
+                        <i class="bi bi-journal-bookmark me-1"></i> Catálogo
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="cliente.html">Cliente</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="cliente.html">
+                        <i class="bi bi-people me-1"></i> Cliente
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="libro.html">Libro</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="libro.html">
+                        <i class="bi bi-book me-1"></i> Libro
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="pedido.html">Pedido</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="pedido.html">
+                        <i class="bi bi-cart me-1"></i> Pedido
+                    </a>
                 </li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    </nav>
 
-    <div class="container mt-2">
-        <main class="flex-grow-1">
-            <form>
-                <div class="input-group">
-                    <input type="search" name="buscar" id="buscar" class="form-control"
-                        placeholder="Buscar por título, género o autor">
-                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+    <main class="container my-4 flex-grow-1">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form class="needs-validation" novalidate>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="search" name="buscar" id="buscar" class="form-control"
+                            placeholder="Buscar por título, género o autor" />
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TABLA CATÁLOGO -->
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle mb-0">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>ISBN</th>
+                                <th>Título</th>
+                                <th>Autor</th>
+                                <th>Género</th>
+                                <th>Precio</th>
+                                <th>Tipo</th>
+                                <th>Stock</th>
+                                <th class="text-center">Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>9788432226895</td>
+                                <td class="fw-semibold">La sombra del viento</td>
+                                <td>Carlos Ruiz Zafón</td>
+                                <td><span class="badge bg-secondary">Novela</span></td>
+                                <td>19,95 €</td>
+                                <td>Libro Papel</td>
+                                <td><span class="badge bg-success">12</span></td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>9788401021513</td>
+                                <td class="fw-semibold">El nombre del viento</td>
+                                <td>Patrick Rothfuss</td>
+                                <td><span class="badge bg-secondary">Fantasía</span></td>
+                                <td>22,90 €</td>
+                                <td>Libro Papel</td>
+                                <td><span class="badge bg-warning text-dark">8</span></td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </form>
-            <table class="table table-striped mt-1">
-                <thead>
-                    <tr>
-                        <th scope="col">ISBN</th>
-                        <th scope="col">Título</th>
-                        <th scope="col">Autor</th>
-                        <th scope="col">Género</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">9788432226895</th>
-                        <td>La sombra del viento</td>
-                        <td>Carlos Ruiz Zafón</td>
-                        <td>Novela</td>
-                        <td>19,95 €</td>
-                        <td>Libro Papel</td>
-                        <td>12</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye-fill"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">9788401021513</th>
-                        <td>El nombre del viento</td>
-                        <td>Patrick Rothfuss</td>
-                        <td>Fantasía</td>
-                        <td>22,90 €</td>
-                        <td>Libro Papel</td>
-                        <td>8</td>
-                        <td>
-                            <a href="#" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-eye-fill"></i>
-                            </a>
-                            <!-- Ventana modal con todos los datos del libro y su tipo -->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </main>
-    </div>
+            </div>
+        </div>
+    </main>
 
-    <div class="container">
-        <footer class="bg-body-tertiary mt-auto d-flex justify-content-between align-items-center py-3 border-top">
-            <p class="mb-0 text-body-secondary">© 2025 Desarrollo en Cliente, Alonso Almodóvar</p>
-        </footer>
-    </div>
+    <!-- FOOTER -->
+    <footer class="bg-white border-top mt-auto">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <p class="mb-0 text-body-secondary">
+                    © 2025 Desarrollo en Cliente · Alonso Almodóvar
+                </p>
+                <i class="bi bi-bootstrap fs-4 text-primary"></i>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Enlace al archivo JavaScript -->
-    <script src="js/ejercicio01_libros.js"></script>
-    <script src="js/ejercicio01_autores.js"></script>
-    <script src="js/ejercicio01_tiposEnvios.js"></script>
-    <script src="js/ejercicio01_clientes.js"></script>
-    <script src="js/ejercicio01_pedidos.js"></script>
-    <script src="js/ejercicio01_libro.js"></script>
-    <script src="js/ejercicio01_cliente.js"></script>
-    <script src="js/ejercicio01_leer_datos.js"></script>
-    <script src="js/ejercicio01_autor.js"></script>
-    <script src="js/ejercicio01_pedido.js"></script>
-    <script src="js/ejercicio01_tipoEnvio.js"></script>
-    <script src="js/ejercicio01_util.js"></script>
-    <script src="js/ejercicio01_tienda.js"></script>
-    <script src="js/ejercicio01_principal.js"></script>
-    <script src="js/ejercicio01.js"></script>
+    <!-- JS del proyecto -->
+    <script src="js/_libros.js"></script>
+    <script src="js/_autores.js"></script>
+    <script src="js/_tiposEnvios.js"></script>
+    <script src="js/_clientes.js"></script>
+    <script src="js/_pedidos.js"></script>
+    <script src="js/_libro.js"></script>
+    <script src="js/_cliente.js"></script>
+    <script src="js/_leer_datos.js"></script>
+    <script src="js/_autor.js"></script>
+    <script src="js/_pedido.js"></script>
+    <script src="js/_tipoEnvio.js"></script>
+    <script src="js/_util.js"></script>
+    <script src="js/_tienda.js"></script>
+    <script src="js/_principal.js"></script>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <!-- Validación Bootstrap -->
+    <script>
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.from(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    },
+                    false
+                );
+            });
+        })();
+    </script>
 </body>
 
 </html>

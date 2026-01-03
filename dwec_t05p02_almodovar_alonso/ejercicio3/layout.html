@@ -2,81 +2,110 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DWEC - Ejercicios T05 - Alonso Almodóvar</title>
-    <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="css/micss.css">
+
+    <link rel="stylesheet" href="css/micss.css" />
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 </head>
 
-<body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <i class="bi bi-bootstrap fs-3 me-2"></i>
-                <span class="fs-4">Librería Almodóvar</span>
-            </a>
-        </header>
-    </div>
+<body class="bg-light d-flex flex-column min-vh-100">
+    
+    <header class="bg-white border-bottom">
+        <div class="container">
+            <div class="d-flex align-items-center py-3">
+                <i class="bi bi-book-half fs-2 me-2 text-primary"></i>
+                <span class="fs-4 fw-semibold">Librería Almodóvar</span>
+            </div>
+        </div>
+    </header>
 
-    <div class="container px-0">
-        <nav class="navbar navbar-light bg-light">
-            <ul class="navbar-nav flex-row w-100 text-center">
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="catalogo.html">Catálogo</a>
+    <nav class="bg-primary">
+        <div class="container-fluid px-0">
+            <ul class="nav nav-pills nav-fill text-center">
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="catalogo.html">
+                        <i class="bi bi-journal-bookmark me-1"></i> Catálogo
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="cliente.html">Cliente</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="cliente.html">
+                        <i class="bi bi-people me-1"></i> Cliente
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="libro.html">Libro</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="libro.html">
+                        <i class="bi bi-book me-1"></i> Libro
+                    </a>
                 </li>
-                <li class="nav-item w-25">
-                    <a class="nav-link py-3 fw-semibold" href="pedido.html">Pedido</a>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="pedido.html">
+                        <i class="bi bi-cart me-1"></i> Pedido
+                    </a>
                 </li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    </nav>
 
-    <div class="container mt-2">
-        <main>
-            <p>T05 - Ejercicio 03 - Alonso Almodóvar</p>
-            <p id="output"></p>
-        </main>
-    </div>
+    <main class="container my-4 flex-grow-1">
+        <p class="text-muted">T05 - Ejercicio 03 - Alonso Almodóvar</p>
+        <p id="output"></p>
+    </main>
 
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 text-body-secondary">© 2025 Desarrollo en Cliente, Alonso Almodóvar</p> <a href="/"
-                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-                aria-label="Bootstrap"> <svg class="bi me-2" width="40" height="32" aria-hidden="true">
-                    <use xlink:href="#bootstrap"></use>
-                </svg> </a>
-        </footer>
-    </div>
+    <footer class="bg-white border-top">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
+                <p class="mb-2 mb-md-0 text-body-secondary">
+                    © 2025 Desarrollo en Cliente · Alonso Almodóvar
+                </p>
+                <i class="bi bi-bootstrap fs-4 text-primary"></i>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Enlace al archivo JavaScript -->
-    <script src="js/ejercicio01_libros.js"></script>
-    <script src="js/ejercicio01_autores.js"></script>
-    <script src="js/ejercicio01_tiposEnvios.js"></script>
-    <script src="js/ejercicio01_clientes.js"></script>
-    <script src="js/ejercicio01_pedidos.js"></script>
-    <script src="js/ejercicio01_libro.js"></script>
-    <script src="js/ejercicio01_cliente.js"></script>
-    <script src="js/ejercicio01_leer_datos.js"></script>
-    <script src="js/ejercicio01_autor.js"></script>
-    <script src="js/ejercicio01_pedido.js"></script>
-    <script src="js/ejercicio01_tipoEnvio.js"></script>
-    <script src="js/ejercicio01_util.js"></script>
-    <script src="js/ejercicio01_tienda.js"></script>
-    <script src="js/ejercicio01_principal.js"></script>
-    <script src="js/ejercicio01.js"></script>
+    <script src="js/_libros.js"></script>
+    <script src="js/_autores.js"></script>
+    <script src="js/_tiposEnvios.js"></script>
+    <script src="js/_clientes.js"></script>
+    <script src="js/_pedidos.js"></script>
+    <script src="js/_libro.js"></script>
+    <script src="js/_cliente.js"></script>
+    <script src="js/_leer_datos.js"></script>
+    <script src="js/_autor.js"></script>
+    <script src="js/_pedido.js"></script>
+    <script src="js/_tipoEnvio.js"></script>
+    <script src="js/_util.js"></script>
+    <script src="js/_tienda.js"></script>
+    <script src="js/_principal.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script>
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.from(forms).forEach((form) => {
+                form.addEventListener(
+                    "submit",
+                    (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    },
+                    false
+                );
+            });
+        })();
+    </script>
 </body>
 
 </html>
