@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01");
+console.log("T04 - Ejercicio 01 - Tienda");
 class Tienda {
     #libros; // Objeto Libros
     #autores; // Objeto Autores
@@ -9,7 +9,7 @@ class Tienda {
     #lector; // Objeto leerDatosPrompt
 
     static instancia = null;
-    static IVA = 0.04;
+    static IVA = 0.21;
 
     static getInstancia(nombreTienda) {
         if (Tienda.instancia === null) {
@@ -138,6 +138,15 @@ class Tienda {
         pedidos[1].calcularTotal();
     }
 
+    iniciar() {
+        this.cargarDatosPrueba();
+        this.pedirOpcionMenu();
+    }
+
+    mostrarMenu() {
+        return "MENÚ TIENDA\n======\n 1. Mostrar Catálogo de Libros Disponibles\n 2. Insertar o Modificar Libro\n 3. Actualizar Stock de un Libro\n 4. Libros con Stock Mínimo";
+    }
+
     pedirOpcionMenu() {
         let opcion = this.lector.leerEnteroEntreHasta(this.mostrarMenu(), 1, 11);
         switch (opcion) {
@@ -163,7 +172,7 @@ class Tienda {
                 const librosStockMinimo = this.notificacionesStockLibrosMinimo();
                 console.log(librosStockMinimo);
                 break;
-            case "11": 
+            case "11":
                 console.log("Adiós!!");
                 break;
             default:
@@ -188,14 +197,14 @@ class Tienda {
         if (tipo == 1) {
             const formato = this.lector.leerCadenaHasta("Escribe el formato del Ebook entre estos: \n" + Ebook.leerFormatos());
             const tamanoArchivo = this.lector.leerRealHasta("Dame el tamaño del Ebook en MiB");
-            libroCreado = new Ebook (isbn, titulo, generoLiterario, autor, precio, tamanoArchivo, formato);
+            libroCreado = new Ebook(isbn, titulo, generoLiterario, autor, precio, tamanoArchivo, formato);
         } else if (tipo == 2) {
             const dimensiones = this.lector.leerCadenaHasta("Dame las dimensiones del libro. Ej: (20x30x40)");
             const peso = this.lector.leerEnteroHasta("Dame el peso del libro");
             const stock = this.lector.leerEnteroHasta("Dame el stock del libro");
-            libroCreado = new LibroPapel (isbn, titulo, generoLiterario, autor, precio, peso, dimensiones, stock);
+            libroCreado = new LibroPapel(isbn, titulo, generoLiterario, autor, precio, peso, dimensiones, stock);
         } else {
-            throw new Error ("Instancia Tipo mal creada")
+            throw new Error("Instancia Tipo mal creada")
         }
         return libroCreado;
     }
@@ -204,7 +213,7 @@ class Tienda {
 
     pedirYCrearAutor() {
         const nombre = this.lector.leerCadenaHasta("Dame el nombre del autor");
-        return new Autor (nombre);
+        return new Autor(nombre);
     }
 
     // pedirYCrearVariosAutores
@@ -245,12 +254,51 @@ class Tienda {
         return mensaje;
     }
 
-    mostrarMenu() {
-        return "MENÚ TIENDA\n======\n 1. Mostrar Catálogo de Libros Disponibles\n 2. Insertar o Modificar Libro\n 3. Actualizar Stock de un Libro\n 4. Libros con Stock Mínimo";
-    }
+    // mostrarPedidosAbiertoCliente
 
-    iniciar() {
-        this.cargarDatosPrueba();
-        this.pedirOpcionMenu();
-    }
+    // borrarCliente
+
+    // hacerPedidoPorCliente
+
+    // mostrarPedidoPorID
+
+    // Aquellos que consideres necesarios.
 }
+
+
+/* La tienda nos permite estas gestiones:
+
+Mostrar Catálogo de Libros Disponibles.
+Muestra al usuario todos los libros disponibles en la tienda (tanto con stock como sin stock).
+
+Insertar Libros o modificar los datos de un libro existente. Se buscará el libro por ISBN. Si no existe, se crea, si existe se modifica. 
+
+Actualizar stock libros. Pide los datos necesarios y actualiza el stock de los libros indicados por el usuario.
+
+Ver notificaciones stock libros bajo mínimo. Muestra un listado de los libros en papel que están sin stock o por debajo del mínimo establecido.
+
+Insertar nuevo cliente. 
+
+Mostrar pedidos abiertos de un cliente por DNI.
+
+Borrar cliente cliente por DNI.
+
+Hacer pedido por cliente identificado por DNI. 
+Se busca el cliente. Debe estar creado previamente.
+Se debe permitir la compra usando un buscador o mostrando un listado de libros (tanto con stock como sin stock).
+Se debe poder seleccionar el método de envío.
+Al finalizar mostrará el total del pedido y un resumen completo del mismo. También preguntará si hay que aplicar algún descuento.
+
+Mostrar pedido por ID de pedido.
+
+Mostrar estadísticas:
+Libro más vendido (reduce y/o find).
+Autor que más dinero ha ganado (reduce).
+Cliente que más pedidos has realizado (solo mirando pedidos) (reduce y/o find).
+Cliente que más libros ha comprado (mirando unidades) (reduce).
+Número total de pedidos abiertos (filter). 
+Importe total facturado (sumando todos los pedidos cerrados) (filter y reduce).
+Tipo de envío más utilizado (reduce).
+
+Salir.
+ */
