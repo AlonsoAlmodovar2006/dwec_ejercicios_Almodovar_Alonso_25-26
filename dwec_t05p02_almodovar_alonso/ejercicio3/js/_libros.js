@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Libros");
+console.log("T05 - Ejercicio 03 - Libros");
 
 class Libros {
     #listadoLibros;
@@ -57,20 +57,13 @@ class Libros {
 
     // No se pueden borrar Libros
 
-    obtenerCadenaLibrosMenu() { 
-        let mensaje = "TODOS LOS LIBROS DE LA TIENDA\n=====\n";
-        let contador = 0;
-        let tipoLibro = "??";
+    obtenerCadenaLibrosMenu() { // Cambiado con la nueva forma de acceder a los libros
+        let libros = [];
         this.listadoLibros.sort((a, b) => a.titulo.localeCompare(b.titulo)); // Tendría que ordenar solo si no está ordenado
         for (const libro of this.listadoLibros) {
-            if (libro instanceof Ebook) {
-                tipoLibro = "Ebook";
-            } else if (libro instanceof LibroPapel) {
-                tipoLibro = "Libro de Papel";
-            }
-            mensaje += ++contador + ". " + libro.titulo + ` (${tipoLibro})\n`;
+            libros.push(libro);
         }
-        return mensaje;
+        return libros;
     }
 
     // Aquellos otros métodos que consideres necesarios

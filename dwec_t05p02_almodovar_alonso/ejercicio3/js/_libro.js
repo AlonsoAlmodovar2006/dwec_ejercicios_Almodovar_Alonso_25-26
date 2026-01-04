@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Libro");
+console.log("T05 - Ejercicio 03 - Libro");
 
 class Libro {
     #isbn;

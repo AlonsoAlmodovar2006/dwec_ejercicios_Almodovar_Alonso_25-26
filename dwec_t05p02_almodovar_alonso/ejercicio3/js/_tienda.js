@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Tienda");
+console.log("T05 - Ejercicio 03 - Tienda");
 class Tienda {
     #libros; // Objeto Libros
     #autores; // Objeto Autores

@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DWEC - Ejercicios T05 - Alonso Almodóvar</title>
 
-    <!-- CSS propio -->
     <link rel="stylesheet" href="css/micss.css" />
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
-    <!-- HEADER -->
+
     <header class="bg-white border-bottom">
         <div class="container">
             <div class="d-flex align-items-center py-3">
@@ -28,7 +25,6 @@
         </div>
     </header>
 
-    <!-- NAVBAR 4 COLUMNAS -->
     <nav class="bg-primary">
         <div class="container-fluid px-0">
             <ul class="nav nav-pills nav-fill text-center">
@@ -61,18 +57,19 @@
             <div class="card-body">
                 <form class="needs-validation" novalidate>
                     <div class="input-group">
-                        <span class="input-group-text bg-white">
-                            <i class="bi bi-search"></i>
-                        </span>
                         <input type="search" name="buscar" id="buscar" class="form-control"
-                            placeholder="Buscar por título, género o autor" />
-                        <button class="btn btn-primary" type="submit">Buscar</button>
+                            placeholder="Buscar por título, género o autor" required />
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <div class="invalid-feedback">
+                            No hay coincidencias en la búsqueda
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- TABLA CATÁLOGO -->
         <div class="card shadow-sm">
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -90,39 +87,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>9788432226895</td>
-                                <td class="fw-semibold">La sombra del viento</td>
-                                <td>Carlos Ruiz Zafón</td>
-                                <td><span class="badge bg-secondary">Novela</span></td>
-                                <td>19,95 €</td>
-                                <td>Libro Papel</td>
-                                <td><span class="badge bg-success">12</span></td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>9788401021513</td>
-                                <td class="fw-semibold">El nombre del viento</td>
-                                <td>Patrick Rothfuss</td>
-                                <td><span class="badge bg-secondary">Fantasía</span></td>
-                                <td>22,90 €</td>
-                                <td>Libro Papel</td>
-                                <td><span class="badge bg-warning text-dark">8</span></td>
-                                <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="detalleLibroModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitulo"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="modalCuerpo"></div>
+                </div>
+            </div>
+        </div>
+
+        <p id="prueba"></p>
     </main>
 
     <!-- FOOTER -->
@@ -152,13 +136,12 @@
     <script src="js/_util.js"></script>
     <script src="js/_tienda.js"></script>
     <script src="js/_principal.js"></script>
+    <script src="js/pagCatalogo.js"></script>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <!-- Validación Bootstrap -->
     <script>
         (() => {
             "use strict";
