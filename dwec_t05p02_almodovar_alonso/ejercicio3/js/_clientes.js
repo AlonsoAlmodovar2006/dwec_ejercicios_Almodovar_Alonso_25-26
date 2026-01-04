@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Clientes");
+console.log("T05 - Ejercicio 03 - Clientes");
 
 class Clientes {
     #listadoClientes;
@@ -48,4 +48,11 @@ class Clientes {
     // No se pueden modificar los clientes
 
     // Aquellos otros métodos que considere necesarios
+    obtenerClientes() {
+        let clientes = [];
+        for (const cliente of this.listadoClientes) {
+            clientes.push(cliente);
+        }
+        return clientes;
+    }
 }

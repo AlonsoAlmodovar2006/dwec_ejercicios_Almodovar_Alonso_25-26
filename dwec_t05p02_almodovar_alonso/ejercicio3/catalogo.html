@@ -53,6 +53,7 @@
     </nav>
 
     <main class="container my-4 flex-grow-1">
+        <!-- BUSCADOR -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <form class="needs-validation" novalidate>
@@ -69,7 +70,7 @@
                 </form>
             </div>
         </div>
-
+        <!-- TABLA -->
         <div class="card shadow-sm">
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -87,15 +88,14 @@
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
+        <!-- MODAL -->
         <div class="modal fade" id="detalleLibroModal" tabindex="-1">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitulo"></h5>
@@ -105,11 +105,8 @@
                 </div>
             </div>
         </div>
-
-        <p id="prueba"></p>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-top mt-auto">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-3">
@@ -121,7 +118,6 @@
         </div>
     </footer>
 
-    <!-- JS del proyecto -->
     <script src="js/_libros.js"></script>
     <script src="js/_autores.js"></script>
     <script src="js/_tiposEnvios.js"></script>

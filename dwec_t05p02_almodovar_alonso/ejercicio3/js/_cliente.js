@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Cliente");
+console.log("T05 - Ejercicio 03 - Cliente");
 
 class Cliente {
     #dni;

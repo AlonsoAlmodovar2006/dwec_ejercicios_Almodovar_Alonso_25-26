@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Tipo Envío");
+console.log("T05 - Ejercicio 03 - Tipo Envío");
 
 class TipoEnvio {
     #nombre;

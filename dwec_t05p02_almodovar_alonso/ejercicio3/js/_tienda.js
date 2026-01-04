@@ -116,26 +116,31 @@ class Tienda {
 
         const envios = [new TipoEnvio("Estándar", 3, 2000, 4.99),
         new TipoEnvio("Urgente 24h", 1, 5000, 9.99),
-        new TipoEnvio("Gran Volumen", 5, 20000, 19.99)];
+        new TipoEnvio("Gran Volumen", 5, 20000, 19.99),
+        new TipoEnvio("Sin Envío", 1, 0, 2.99)];
         this.tiposEnvios.insertarTipos(envios);
 
         const clientes = [new Cliente("12345678", "Alonso Almodóvar", "Calle Mayor 1, Valdepeñas", []),
         new Cliente("87654321", "Carlos Pérez", "Av. Diagonal 20, Barcelona", [])];
         this.clientes.insertarClientes(clientes);
 
-        const pedidos = [new Pedido(clientes[0]), new Pedido(clientes[1])];
+        const pedidos = [new Pedido(clientes[0]), new Pedido(clientes[1]), new Pedido(clientes[1])];
         this.pedidos.insertarPedidos(pedidos);
 
         clientes[0].insertarPedidoCliente(pedidos[0]);
         clientes[1].insertarPedidoCliente(pedidos[1]);
+        clientes[1].insertarPedidoCliente(pedidos[2]);
 
         pedidos[0].insertarLibro(libros[2], 1);
         pedidos[0].calcularTotal();
 
         pedidos[1].insertarLibro(libros[1], 1);
         libros[1].reducirStock();
-        pedidos[1].establecerTipoEnvio(envios[0]);
+        pedidos[1].establecerTipoEnvio(envios[2]);
         pedidos[1].calcularTotal();
+
+        pedidos[2].insertarLibro(libros[2], 1);
+        pedidos[2].calcularTotal();
     }
 
     iniciar() {
@@ -263,6 +268,9 @@ class Tienda {
     // mostrarPedidoPorID
 
     // Aquellos que consideres necesarios. 
+    mostrarClientes() {
+        return this.clientes.obtenerClientes();
+    }
 }
 
 

@@ -163,7 +163,7 @@ class Util {
 }
 
 function numEnteroPositivo(numero) {
-    return Util.validarEntero(numero) && numero > 0;
+    return Util.validarEntero(numero) && numero >= 0;
 }
 
 function numRealPositivo(numero) {

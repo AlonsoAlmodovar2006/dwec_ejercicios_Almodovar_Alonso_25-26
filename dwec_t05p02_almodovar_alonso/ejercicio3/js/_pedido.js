@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Pedido");
+console.log("T05 - Ejercicio 03 - Pedido");
 
 class Pedido {
     #id;
