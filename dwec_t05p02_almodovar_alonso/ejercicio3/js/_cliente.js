@@ -1,16 +1,16 @@
 console.log("T05 - Ejercicio 03 - Cliente");
 
 class Cliente {
-    #dni;
+    #dni; // Único
     #nombre; // Nombre Completo
-    #direccion;
-    #listaPedidos; // Array de Objetos Pedido
+    #direccion; // TipoCalle Nombre Nº, Población
+    #listaPedidos; // Objeto Pedido
 
-    constructor (id, nom, dir, pedidos) {
+    constructor (id, nom, dir) {
         this.dni = id;
         this.nombre = nom;
         this.direccion = dir;
-        this.listaPedidos = pedidos; 
+        this.#listaPedidos = new Pedidos(); 
     }
 
     get dni() {
@@ -18,7 +18,7 @@ class Cliente {
     }
     set dni(valor) {
         if (!Util.validarEntero(valor)) {
-            throw new Error("dni Inválido");
+            throw new Error("DNI Inválido");
         }
         this.#dni = valor;
     }
@@ -28,7 +28,7 @@ class Cliente {
     }
     set nombre(valor) {
         if (!Util.validarNombrePersona(valor)) {
-            throw new Error("nombre Inválido");
+            throw new Error("Nombre Inválido");
         }
         this.#nombre = valor;
     }
@@ -46,18 +46,12 @@ class Cliente {
     get listaPedidos() {
         return this.#listaPedidos;
     }
-    set listaPedidos(valor) {
-        if (!Array.isArray(valor)) {
-            throw new Error("Formato de listaPedidos Inválido");
-        }
-        this.#listaPedidos = valor;
-    }
 
     mostrarDatosCliente() {
-        return `(Cliente) ${this.dni} - Nombre: ${this.nombre} | Dirección: ${this.direccion} | Número Pedidos: ${this.listaPedidos.length} `;
+        return `(Cliente) ${this.dni} - Nombre: ${this.nombre} | Dirección: ${this.direccion} | Número Pedidos: ${this.listaPedidos.tamanoListaPedidos()} `;
     }
 
-    mostrarPedidosClienteAbierto() {
+    mostrarPedidosClienteAbierto() { // La primera parte del mensaje debería ir en Tienda
         let mensaje = `PEDIDOS ABIERTOS DEL CLIENTE ${this.dni} \n`;
         for (const pedido of this.listaPedidos) {
             if (pedido.abierto){
@@ -68,6 +62,6 @@ class Cliente {
     }
 
     insertarPedidoCliente(pedidoAInsertar) {
-        this.listaPedidos.push(pedidoAInsertar);
+        this.listaPedidos.insertarPedidos([pedidoAInsertar]);
     }
 }

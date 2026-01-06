@@ -19,7 +19,7 @@ class Clientes {
     insertarClientes(clientes) {
         let contador = 0;
         for (const cliente of clientes) {
-            if (!this.existeClientePorDNI(cliente)) {
+            if (!this.existeClientePorDNI(cliente.dni)) {
                 contador++;
                 this.listadoClientes.push(cliente);
             }
@@ -47,11 +47,11 @@ class Clientes {
 
     // No se pueden modificar los clientes
 
-    // Aquellos otros métodos que considere necesarios
+    // Aquellos otros métodos que consideres necesarios
     obtenerClientes() {
         let clientes = [];
         for (const cliente of this.listadoClientes) {
-            clientes.push(cliente);
+            clientes.unshift(cliente);
         }
         return clientes;
     }

@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Autores");
+console.log("T05 - Ejercicio 03 - Autores");
 
 class Autores {
     #listadoAutores;
@@ -19,7 +19,7 @@ class Autores {
     insertarAutores(autores) {
         let contador = 0;
         for (const autor of autores) {
-            if (!this.existeAutorPorNombre(autor)) {
+            if (!this.existeAutorPorNombre(autor.nombre)) {
                 contador++;
                 this.listadoAutores.push(autor);
             }
@@ -49,7 +49,7 @@ class Autores {
 
     // No se pueden borrar autores
 
-    obtenerCadenaAutoresMenu() {
+    obtenerCadenaAutoresMenu() { // La primera parte del mensaje debería ir en Tienda
         let mensaje = "TODOS LOS LIBROS DE LOS AUTORES REGISTRADOS EN LA TIENDA\n=====\n";
         let contador = 0;
         this.listadoAutores.sort((a, b) => a.nombre.localeCompare(b.nombre)); // Tendría que ordenar solo si no está ordenado
@@ -61,11 +61,10 @@ class Autores {
     }
 
     // Aquellos otros métodos que consideres necesarios.
-    obtenerAutores() {
+    obtenerAutores() { // La primera parte del mensaje debería ir en Tienda
         let mensaje = "TODOS LOS AUTORES REGISTRADOS EN LA TIENDA\n=====\n";
-        let contador = 0;
         for (const autor of this.listadoAutores) {
-            mensaje += autor.mostrarDatosAutor();
+            mensaje += autor.mostrarDatosAutor() + "\n";
         }
         return mensaje;
     }

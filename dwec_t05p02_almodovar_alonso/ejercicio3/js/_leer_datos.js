@@ -1,4 +1,4 @@
-console.log("T04 - Ejercicio 01 - Leer Datos");
+console.log("T05 - Ejercicio 03 - Leer Datos");
 
 class LeerDatos {
     leerEntero(mensaje_o_id) {

@@ -62,4 +62,7 @@ class Pedidos {
     // No se pueden modificar los Pedidos
 
     // Aquellos otros métodos que considere necesarios
+    tamanoListaPedidos() {
+        return this.listadoPedidos.length;
+    }
 }

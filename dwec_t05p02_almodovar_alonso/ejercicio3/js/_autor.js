@@ -1,9 +1,9 @@
 console.log("T05 - Ejercicio 03 - Autor");
 
 class Autor {
-    #id; // único e Incrementado Internamente
+    #id; // Único e Incrementado Internamente
     #nombre; // Nombre Completo
-    #libros; // Array de Objetos Libro
+    #libros; // Objeto Libros
 
     static ultimoId = 0;
 
@@ -15,7 +15,7 @@ class Autor {
     constructor(nombreApellidos) {
         this.#id = Autor.obtenerSiguienteId();
         this.nombre = nombreApellidos;
-        this.#libros = [];
+        this.#libros = new Libros();
     }
 
     get id() {
@@ -38,16 +38,14 @@ class Autor {
 
     mostrarDatosAutor() {
         let tituloLibros = "";
-        for (const elLibro of this.libros) {
-            tituloLibros += elLibro.titulo + " - ";
+        for (const libro of this.libros) {
+            tituloLibros += libro.titulo + " - ";
         }
         return `(Autor) ${this.id} - Nombre: ${this.nombre} | Libros: ${tituloLibros} `;
     }
 
     insertarLibro(libro) {
-        if (this.libros.some(misLibros => misLibros.isbn == libro.isbn)) {
-            this.libros.push(libro);
-        }
+        this.libros.insertarLibros([libro]);
         return this.libros.length;
     }
 

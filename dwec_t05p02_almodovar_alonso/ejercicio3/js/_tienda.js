@@ -120,8 +120,8 @@ class Tienda {
         new TipoEnvio("Sin Envío", 1, 0, 2.99)];
         this.tiposEnvios.insertarTipos(envios);
 
-        const clientes = [new Cliente("12345678", "Alonso Almodóvar", "Calle Mayor 1, Valdepeñas", []),
-        new Cliente("87654321", "Carlos Pérez", "Av. Diagonal 20, Barcelona", [])];
+        const clientes = [new Cliente("12345678", "Alonso Almodóvar", "Calle Mayor 1, Valdepeñas"),
+        new Cliente("87654321", "Carlos Pérez", "Av. Diagonal 20, Barcelona")];
         this.clientes.insertarClientes(clientes);
 
         const pedidos = [new Pedido(clientes[0]), new Pedido(clientes[1]), new Pedido(clientes[1])];
@@ -148,42 +148,9 @@ class Tienda {
         // this.pedirOpcionMenu();
     }
 
-    mostrarMenu() {
-        return "MENÚ TIENDA\n======\n 1. Mostrar Catálogo de Libros Disponibles\n 2. Insertar o Modificar Libro\n 3. Actualizar Stock de un Libro\n 4. Libros con Stock Mínimo";
-    }
+    // mostrarMenu()
 
-    pedirOpcionMenu() {
-        let opcion = this.lector.leerEnteroEntreHasta(this.mostrarMenu(), 1, 11);
-        switch (opcion) {
-            case "1":
-                let cadenaLibros = this.mostrarCatalogoLibrosDisponibles();
-                console.log(cadenaLibros);
-                break;
-            case "2":
-                const isbn = this.lector.leerEntero("Dame el ISBN del libro");
-                if (this.libros.existeLibroPorIsbn(isbn)) {
-                    const libroAModificar = this.libros.buscarLibroPorIsbn(isbn);
-                    // Modificar libro 
-                } else {
-                    const miLibro = this.pedirYCrearLibro(isbn);
-                    console.log(miLibro);
-                }
-                break;
-            case "3":
-                const nuevoStock = this.actualizarStockLibros();
-                console.log(nuevoStock);
-                break;
-            case "4":
-                const librosStockMinimo = this.notificacionesStockLibrosMinimo();
-                console.log(librosStockMinimo);
-                break;
-            case "11":
-                console.log("Adiós!!");
-                break;
-            default:
-                console.log("jaaj");
-        }
-    }
+    // pedirOpcionMenu() 
 
     pedirYCrearLibro(isbn) {
         let libroCreado = null;
@@ -219,11 +186,18 @@ class Tienda {
     pedirYCrearAutor() {
         const nombre = this.lector.leerCadenaHasta("Dame el nombre del autor");
         return new Autor(nombre);
-    } 
+    }
 
     // pedirYCrearVariosAutores
 
-    // pedirYCrearCliente
+    pedirYCrearCliente(dni, nombre, direccion) {
+        let nuevoCliente = null;
+        let clientesInsertados = this.clientes.insertarClientes([new Cliente(dni, nombre, direccion)]);
+        if (clientesInsertados > 0) {
+            nuevoCliente = new Cliente(dni, nombre, direccion);
+        }
+        return nuevoCliente
+    }
 
     // pedirYCrearVariosClientes
 
