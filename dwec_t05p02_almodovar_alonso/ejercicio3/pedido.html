@@ -50,105 +50,150 @@
         </div>
     </nav>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="container my-4 flex-grow-1">
-        <p class="text-muted">T05 - Ejercicio 03 - Alonso Almodóvar</p>
-
-        <!-- Aquí integramos el Acordeón de la página original -->
         <div class="accordion" id="accordionPedido">
-
-            <!-- SECCIÓN CLIENTE -->
-            <div class="accordion-item">
+            <!-- ACORDEÓN 1: CLIENTE -->
+            <div class="accordion-item" id="itemCliente">
                 <h2 class="accordion-header">
                     <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#clientePedido" aria-expanded="true">
-                        <i class="bi bi-person me-2"></i> Cliente
+                        data-bs-target="#collapseCliente">
+                        <i class="bi bi-person me-2"></i> 1. Selección de Cliente
                     </button>
                 </h2>
-                <div id="clientePedido" class="accordion-collapse collapse show">
+                <div id="collapseCliente" class="accordion-collapse collapse show" data-bs-parent="#accordionPedido">
                     <div class="accordion-body">
-
-                        <form class="mb-4">
-                            <div class="row g-2 align-items-center">
-                                <label for="dni" class="col-sm-3 col-form-label fw-semibold">DNI</label>
-                                <div class="col-sm-7">
-                                    <div class="input-group">
-                                        <input type="search" id="dni" class="form-control"
-                                            placeholder="Introduce el DNI del cliente">
-                                        <button class="btn btn-primary" type="submit">
+                        <form id="formCliente" class="needs-validation" novalidate>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-6">
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text">DNI</span>
+                                        <input type="number" id="dni" class="form-control" min="10000000" max="99999999"
+                                            placeholder="DNI" required>
+                                        <button class="btn btn-primary" type="submit" id="btnBuscarCliente">
                                             <i class="bi bi-search"></i>
                                         </button>
+                                        <div class="invalid-feedback">
+                                            Introduce un DNI válido existente.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="infoClienteSeleccionado" class="p-2 border rounded bg-light d-none">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span>Cliente: <strong id="nombreClienteSeleccionado"></strong></span>
+                                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                                id="btnDeseleccionarCliente">Deseleccionar</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
-
-                        <div class="border rounded p-3 bg-light">
-                            <p class="mb-2 fw-semibold text-muted">Cliente seleccionado</p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" id="deseleccionar" checked>
-                                <label class="form-check-label" for="deseleccionar">
-                                    Deseleccionar cliente
-                                </label>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
-
-            <!-- SECCIÓN LIBRO -->
-            <div class="accordion-item">
+            <!-- ACORDEÓN 2: LIBRO -->
+            <div class="accordion-item" id="itemLibro">
                 <h2 class="accordion-header">
-                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#libroPedido">
-                        <i class="bi bi-book me-2"></i> Libro
+                    <button class="accordion-button fw-semibold collapsed" id="btnAccordeonLibro" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseLibro" disabled>
+                        <i class="bi bi-book me-2"></i> 2. Añadir Libros
                     </button>
                 </h2>
-                <div id="libroPedido" class="accordion-collapse collapse">
+                <div id="collapseLibro" class="accordion-collapse collapse" data-bs-parent="#accordionPedido">
                     <div class="accordion-body">
-
-                        <form>
-                            <div class="row g-2 align-items-center">
-                                <label for="isbn" class="col-sm-3 col-form-label fw-semibold">ISBN</label>
-                                <div class="col-sm-7">
-                                    <div class="input-group">
-                                        <input type="search" id="isbn" class="form-control"
-                                            placeholder="Introduce el ISBN del libro">
-                                        <button class="btn btn-primary" type="submit">
+                        <form id="formOperacionLibro" class="needs-validation" novalidate>
+                            <!-- ISBN -->
+                            <div class="row g-3 align-items-center mb-3">
+                                <div class="col-md-5">
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text">ISBN</span>
+                                        <input type="text" id="isbn" class="form-control" placeholder="ISBN" required>
+                                        <button class="btn btn-primary" type="button" id="btnBuscarLibro">
                                             <i class="bi bi-search"></i>
                                         </button>
+                                        <div class="invalid-feedback" id="feedbackIsbn">
+                                            El ISBN es obligatorio y debe estar registrado
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- DETALLES Y UNIDADES -->
+                            <div id="anadirLibro" class="row g-3 d-none align-items-end border-top pt-3">
+                                <div class="col-md-6">
+                                    <div id="infoLibroSeleccionado"
+                                        class="p-2 border rounded bg-light h-100 d-flex align-items-center">
+                                        <span>Libro: <strong id="tituloLibroSeleccionado"></strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputUnidades" class="form-label small fw-bold">Unidades</label>
+                                    <input type="number" id="inputUnidades" class="form-control" value="1" min="1"
+                                        required>
+                                    <div class="invalid-feedback">Mínimo 1 unidad.</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-success w-100" type="submit" id="btnAnadirLibro">
+                                        <i class="bi bi-plus-circle"></i> Añadir
+                                    </button>
+                                </div>
+                            </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
-            <!-- SECCIÓN RESUMEN -->
-            <div class="accordion-item">
+            <!-- ACORDEÓN 3: ENVÍO -->
+            <div class="accordion-item" id="itemEnvio">
                 <h2 class="accordion-header">
-                    <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#resumenPedido">
-                        <i class="bi bi-receipt me-2"></i> Resumen del pedido
+                    <button class="accordion-button fw-semibold collapsed" id="btnAccordeonEnvio" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseEnvio" disabled>
+                        <i class="bi bi-truck me-2"></i> 3. Tipo de Envío
                     </button>
                 </h2>
-                <div id="resumenPedido" class="accordion-collapse collapse">
-                    <div class="accordion-body text-muted">
-                        Selecciona un cliente y añade libros para visualizar el resumen del pedido.
+                <div id="collapseEnvio" class="accordion-collapse collapse" data-bs-parent="#accordionPedido">
+                    <div class="accordion-body">
+                        <form id="formEnvio" class="needs-validation" novalidate>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-8">
+                                    <select class="form-select" id="selectTipoEnvio" required>
+                                        
+                                    </select>
+                                    <div class="invalid-feedback">Debe seleccionar un tipo de envío válido.</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary w-100" type="submit">Confirmar Envío</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- Fin del Acordeón -->
-
-        <p id="output" class="mt-3"></p>
+        <!-- RESUMEN -->
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-white fw-bold">Resumen del Pedido</div>
+            <div class="card-body" id="contenedorResumen">
+                <p id="resumenVacio" class="text-center text-muted py-3">No hay datos en el pedido todavía.</p>
+                <p id="datosCliente"></p>
+                <div id="tablaResumen" class="d-none">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Libro</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaPedido"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end gap-2 bg-white">
+                <button class="btn btn-outline-secondary" id="btnCancelarPedido">Cancelar</button>
+                <button class="btn btn-success px-4" id="btnPagarPedido" disabled>Pagar</button>
+            </div>
+        </div>
     </main>
 
-    <!-- FOOTER (Estilo Layout) -->
     <footer class="bg-white border-top">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
@@ -160,7 +205,6 @@
         </div>
     </footer>
 
-    <!-- Scripts de la página original -->
     <script src="js/_libros.js"></script>
     <script src="js/_autores.js"></script>
     <script src="js/_tiposEnvios.js"></script>
@@ -177,12 +221,10 @@
     <script src="js/_principal.js"></script>
     <script src="js/pagPedido.js"></script>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-    <!-- Validación Bootstrap -->
     <script>
         (() => {
             "use strict";

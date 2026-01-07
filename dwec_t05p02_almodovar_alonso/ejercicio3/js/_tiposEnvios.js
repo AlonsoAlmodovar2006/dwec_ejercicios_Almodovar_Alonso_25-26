@@ -18,7 +18,7 @@ class TiposEnvios {
     insertarTipos(tiposEnvios) {
         let contador = 0;
         for (const tipos of tiposEnvios) {
-            if (!this.existeTipoPorNombre(tipos)) {
+            if (!this.existeTipoPorNombre(tipos.nombre)) {
                 contador++;
                 this.listadoTiposEnvios.push(tipos);
             }
@@ -39,14 +39,13 @@ class TiposEnvios {
 
     // No se pueden borrar tipos.
 
-    obtenerCadenaTiposMenu() {
-        let mensaje = "TODOS LOS TIPOS DE ENVÍO REGISTRADOS EN LA TIENDA\n=====\n";
-        let contador = 0;
+    obtenerCadenaTiposMenu() { // Modificado para el nuevo ejercicio
+        let envios = [];
         this.listadoTiposEnvios.sort(function (a, b) { return b.precio - a.precio }); // Tendría que ordenar solo si no está ordenado
         for (const envio of this.listadoTiposEnvios) {
-            mensaje += ++contador + ". " + envio.nombre + `(${envio.precio} €)\n`;
+            envios.push(envio.nombre);
         }
-        return mensaje;
+        return envios;
     }
 
     // Aquellos otros métodos que consideres necesarios.

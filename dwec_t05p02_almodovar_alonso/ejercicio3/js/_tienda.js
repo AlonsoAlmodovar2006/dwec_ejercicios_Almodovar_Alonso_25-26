@@ -248,6 +248,18 @@ class Tienda {
     mostrarFormatos() {
         return Ebook.listaFormatos();
     }
+
+    mostrarTiposEnvio() {
+        return this.tiposEnvios.obtenerCadenaTiposMenu();
+    }
+
+    buscarCliente(dniCliente) {
+        return this.clientes.buscarClientePorDNI(dniCliente);
+    }
+
+    buscarLibro(isbnLibro) {
+        return this.libros.buscarLibroPorIsbn(isbnLibro);
+    }
 }
 
 
