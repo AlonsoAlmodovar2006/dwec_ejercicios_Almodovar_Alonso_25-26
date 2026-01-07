@@ -51,20 +51,22 @@
     </nav>
 
     <main class="container my-4 flex-grow-1">
+        <!-- FORMULARIO LIBRO -->
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white fw-semibold">
                 Nuevo libro
             </div>
             <div class="card-body">
                 <form class="needs-validation" novalidate>
+                    <!-- ISBN -->
                     <div class="row mb-3">
                         <label for="isbn" class="col-md-2 col-form-label">ISBN</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="isbn" id="isbn" required />
-                            <div class="invalid-feedback">El ISBN es obligatorio</div>
+                            <input type="number" min="100000" class="form-control" name="isbn" id="isbn" required />
+                            <div class="invalid-feedback">El ISBN es obligatorio y debe ser único</div>
                         </div>
                     </div>
-
+                    <!-- TÍTULO -->
                     <div class="row mb-3">
                         <label for="titulo" class="col-md-2 col-form-label">Título</label>
                         <div class="col-md-10">
@@ -72,22 +74,15 @@
                             <div class="invalid-feedback">El título es obligatorio</div>
                         </div>
                     </div>
-
+                    <!-- GÉNERO -->
                     <div class="row mb-3">
                         <label for="genero" class="col-md-2 col-form-label">Género</label>
                         <div class="col-md-4">
-                            <select class="form-select" id="genero" required>
-                                <option selected disabled value="">
-                                    - Géneros disponibles -
-                                </option>
-                                <option>Novela</option>
-                                <option>Fantasía</option>
-                                <option>Ensayo</option>
-                            </select>
+                            <select class="form-select" id="genero" required></select>
                             <div class="invalid-feedback">Selecciona un género</div>
                         </div>
                     </div>
-
+                    <!-- PRECIO -->
                     <div class="row mb-3">
                         <label for="precio" class="col-md-2 col-form-label">Precio</label>
                         <div class="col-md-4">
@@ -95,35 +90,68 @@
                             <div class="invalid-feedback">Introduce un precio válido</div>
                         </div>
                     </div>
-
+                    <!-- TIPO -->
                     <div class="row mb-3">
                         <label class="col-md-2 col-form-label">Tipo</label>
                         <div class="col-md-10">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipo" id="ebook" required />
+                                <input class="form-check-input" type="radio" name="tipo" id="ebook" value="Ebook"
+                                    required />
                                 <label class="form-check-label" for="ebook">Ebook</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipo" id="papel" required />
+                                <input class="form-check-input" type="radio" name="tipo" id="papel" value="Papel"
+                                    required />
                                 <label class="form-check-label" for="papel">Papel</label>
                             </div>
+                            <div class="invalid-feedback">Selecciona un tipo de libro.</div>
                         </div>
                     </div>
-
+                    <!-- EBOOK -->
+                    <div id="campos-ebook" class="row mb-3 d-none">
+                        <label class="col-md-2 col-form-label" for="tamano">Detalles Ebook</label>
+                        <div class="col-md-5">
+                            <input type="number" class="form-control" id="tamano" placeholder="Tamaño (MB)" required
+                                disabled />
+                            <div class="invalid-feedback">Introduce un tamaño.</div>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-select" id="formato" required disabled>
+                            </select>
+                            <div class="invalid-feedback">Selecciona un formato.</div>
+                        </div>
+                    </div>
+                    <!-- PAPEL -->
+                    <div id="campos-papel" class="row mb-3 d-none">
+                        <label class="col-md-2 col-form-label">Detalles Papel</label>
+                        <div class="col-md-3">
+                            <input type="number" min="1" class="form-control" id="peso" placeholder="Peso (g)" required
+                                disabled />
+                            <div class="invalid-feedback">Introduce un peso válido.</div>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="dimensiones" pattern="/^\d+x\d+x\d+$/" placeholder="Dimensiones (0x0x0)"
+                                required disabled />
+                            <div class="invalid-feedback">Introduce las dimensiones de forma correcta (0x0x0)</div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" min="0" class="form-control" id="stock" placeholder="Stock" required
+                                disabled />
+                            <div class="invalid-feedback">Introduce el stock.</div>
+                        </div>
+                    </div>
                     <!-- AUTORES -->
                     <div class="row mb-3">
                         <label class="col-md-2 col-form-label">Autores</label>
                         <div class="col-md-5">
-                            <select class="form-select" multiple>
+                            <select class="form-select" id="autoresSelect" multiple>
                                 <option disabled>Autores existentes</option>
-                                <option>Autor 1</option>
-                                <option>Autor 2</option>
-                                <option>Autor 3</option>
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="Nuevo autor" />
+                            <input type="text" class="form-control" id="inputAutor" placeholder="Nuevo autor"/>
                         </div>
+                        <div class="invalid-feedback">Selecciona un autor</div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -132,8 +160,6 @@
                 </form>
             </div>
         </div>
-
-        <p id="prueba" class="mt-3"></p>
     </main>
 
     <footer class="bg-white border-top mt-auto">

@@ -19,7 +19,7 @@ class Libros {
     insertarLibros(libros) {
         let contador = 0;
         for (const libro of libros) {
-            if (!this.existeLibroPorIsbn(libro)) {
+            if (!this.existeLibroPorIsbn(libro.isbn)) {
                 contador++;
                 this.listadoLibros.push(libro);
             }

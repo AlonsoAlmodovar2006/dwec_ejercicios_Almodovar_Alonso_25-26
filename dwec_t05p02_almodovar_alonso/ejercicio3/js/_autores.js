@@ -61,12 +61,13 @@ class Autores {
     }
 
     // Aquellos otros métodos que consideres necesarios.
-    obtenerAutores() { // La primera parte del mensaje debería ir en Tienda
-        let mensaje = "TODOS LOS AUTORES REGISTRADOS EN LA TIENDA\n=====\n";
+    obtenerAutores() {
+        this.listadoAutores.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        let autores = [];
         for (const autor of this.listadoAutores) {
-            mensaje += autor.mostrarDatosAutor() + "\n";
+            autores.push(autor);
         }
-        return mensaje;
+        return autores;
     }
 
     tamanoListaAutores() {

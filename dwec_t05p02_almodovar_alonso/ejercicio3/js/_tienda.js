@@ -152,39 +152,30 @@ class Tienda {
 
     // pedirOpcionMenu() 
 
-    pedirYCrearLibro(isbn) {
-        let libroCreado = null;
-        const titulo = this.lector.leerCadenaHasta("Dame el título del libro");
-        const generoLiterario = this.lector.leerCadenaHasta("Escribe el género del libro entre estos: \n" + Libro.leerGenerosLiterarios());
-        const numAutor = this.lector.leerEnteroEntreHasta("Elige el autor del libro: \n" + this.autores.obtenerAutores() + "\n 0. Crear Autor", 0, this.autores.tamanoListaAutores());
-        let autor = [];
-        if (numAutor == 0) {
-            const primerAutor = this.pedirYCrearAutor();
-            autor.push(primerAutor);
+    pedirYCrearLibro(isbn, titulo, generoLiterario, autores, precio, tipo, tamanoArchivo, formato, peso, dimensiones, stock) {
+        let nuevoLibro = null;
+        let losAutores = [];
+        if (this.autores.buscarAutoresPorNombre(autores[0]) === null) {
+            const primerAutor = this.pedirYCrearAutor(autores[0]);
+            losAutores.push(primerAutor);
         } else {
-            autor.push(this.autores.buscarAutoresPorID(numAutor));
+            losAutores.push(this.autores.buscarAutoresPorNombre(autores));
         }
-        const precio = this.lector.leerRealHasta(`Dame el precio de ${titulo}`);
-        const tipo = this.lector.leerEnteroEntreHasta("Elige el tipo de libro que es: \n=====\n 1. Ebook\n 2. Libro de Papel", 1, 2);
-        if (tipo == 1) {
-            const formato = this.lector.leerCadenaHasta("Escribe el formato del Ebook entre estos: \n" + Ebook.leerFormatos());
-            const tamanoArchivo = this.lector.leerRealHasta("Dame el tamaño del Ebook en MiB");
-            libroCreado = new Ebook(isbn, titulo, generoLiterario, autor, precio, tamanoArchivo, formato);
-        } else if (tipo == 2) {
-            const dimensiones = this.lector.leerCadenaHasta("Dame las dimensiones del libro. Ej: (20x30x40)");
-            const peso = this.lector.leerEnteroHasta("Dame el peso del libro");
-            const stock = this.lector.leerEnteroHasta("Dame el stock del libro");
-            libroCreado = new LibroPapel(isbn, titulo, generoLiterario, autor, precio, peso, dimensiones, stock);
+        if (tipo == "Ebook") {
+            nuevoLibro = new Ebook(isbn, titulo, generoLiterario, autores, precio, tamanoArchivo, formato);
+        } else if (tipo == "Papel") {
+            nuevoLibro = new LibroPapel(isbn, titulo, generoLiterario, autores, precio, peso, dimensiones, stock);
         } else {
             throw new Error("Instancia Tipo mal creada")
         }
-        return libroCreado;
+        const nLibrosCreados = this.libros.insertarLibros([nuevoLibro]);
+        if (nLibrosCreados == 0) nuevoLibro = null;
+        return nuevoLibro;
     }
 
     // pedirYCrearVariosLibros
 
-    pedirYCrearAutor() {
-        const nombre = this.lector.leerCadenaHasta("Dame el nombre del autor");
+    pedirYCrearAutor(nombre) {
         return new Autor(nombre);
     }
 
@@ -244,6 +235,18 @@ class Tienda {
     // Aquellos que consideres necesarios. 
     mostrarClientes() {
         return this.clientes.obtenerClientes();
+    }
+
+    mostrarAutores() {
+        return this.autores.obtenerAutores();
+    }
+
+    mostrarGeneros() {
+        return Libro.listaGeneros();
+    }
+
+    mostrarFormatos() {
+        return Ebook.listaFormatos();
     }
 }
 

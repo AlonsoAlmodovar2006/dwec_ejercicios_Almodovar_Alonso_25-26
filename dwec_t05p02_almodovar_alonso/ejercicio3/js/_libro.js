@@ -110,15 +110,6 @@ class Libro {
     static listaGeneros() {
         return [...Libro.GENEROS_LITERARIOS];
     }
-    // Clase inservible en otro contexto 
-    static leerGenerosLiterarios() {
-        let mensaje = "";
-        let contador = 0;
-        Libro.GENEROS_LITERARIOS.forEach(function (valor) {
-            mensaje += ++contador + ". " + valor + "\n";
-        })
-        return mensaje;
-    }
 }
 
 class Ebook extends Libro {
@@ -183,16 +174,7 @@ class Ebook extends Libro {
 
     // Aquellos otros métodos que consideres necesarios
     static listaFormatos() {
-        return [...Libro.GENEROS_LITERARIOS];
-    }
-    // Clase inservible en otro contexto 
-    static leerFormatos() {
-        let mensaje = "";
-        let contador = 0;
-        Ebook.FORMATOS.forEach(function (valor) {
-            mensaje += ++contador + ". " + valor + "\n";
-        })
-        return mensaje;
+        return [...Ebook.FORMATOS];
     }
 }
 
