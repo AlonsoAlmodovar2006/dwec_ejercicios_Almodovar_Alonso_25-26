@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DWEC - Ejercicios T06 - Alonso Almodóvar</title>
+    <link rel="stylesheet" href="css/micss.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <header class="bg-white border-bottom">
+        <div class="container">
+            <div class="d-flex align-items-center py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                    class="bi">
+                    <path
+                        d="M23.9384766,22.2591076l-11.5-21.0186596c-0.1757813-0.3205972-0.7011719-0.3205972-0.8769531,0l-11.5,21.0186596c-0.0849609,0.1549225-0.081543,0.3435669,0.0083008,0.4955578S0.3232422,23,0.5,23h23c0.1767578,0,0.340332-0.0933437,0.4301758-0.2453346S24.0234375,22.4140301,23.9384766,22.2591076z M11.5,8.4136963c-1.1998291,0.0825195-2.3184204,0.454895-3.2905884,1.0491943L11.5,3.4540405V8.4136963z M11.5,9.4136963v12.560791c-3.2416382-0.2582397-5.8017578-2.9732056-5.8017578-6.2801514S8.2583618,9.6719971,11.5,9.4136963z M12.5,9.413269c3.2453003,0.2545776,5.8095703,2.9714966,5.8095703,6.2810669s-2.56427,6.026001-5.8095703,6.2805786V9.413269z M12.5,8.4133301V3.4540405l3.2866821,6.001709C14.8151245,8.8643188,13.697998,8.4943848,12.5,8.4133301z M4.706604,15.8592529C4.7655029,18.4788208,6.2077637,20.7579956,8.3322144,22H1.34375L4.706604,15.8592529z M15.6755981,22c2.1209106-1.2399292,3.5615234-3.5136108,3.624939-6.1276855L22.65625,22H15.6755981z" />
+                </svg>
+                <span class="fs-4 fw-semibold">API Harry Potter</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-primary">
+        <div class="container-fluid px-0">
+            <ul class="nav nav-pills nav-fill text-center">
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="#sectionBuscador">
+                        <i class="bi bi-search me-1"></i> Buscador
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="#sectionBienvenida">
+                        <i class="bi bi-person-raised-hand me-1"></i> Bienvenida
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="#sectionFavoritos">
+                        <i class="bi bi-star me-1"></i> Favoritos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link rounded-0 py-3 fw-semibold text-white" href="#sectionQuienesSomos">
+                        <i class="bi bi-question me-1"></i> Quiénes Somos
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container my-4 flex-grow-1">
+        <!-- BUSCADOR -->
+        <div class="card mb-4 shadow-sm" id="sectionBuscador">
+            <div class="card-body">
+                <h1 class="h3 mb-3 border-bottom pb-2">
+                    Buscador
+                </h1>
+                <div class="input-group mt-3">
+                    <form id="formBuscador" class="needs-validation input-group mt-3" novalidate>
+                        <input type="text" class="form-control" id="inputPersonaje" placeholder="Buscar personaje" required>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <div class="invalid-feedback">
+                            Personaje no encontrado
+                        </div>
+                    </form>
+                </div>
+                <div id="divTablaPersonajes" class="table-responsive">
+                    <table id="tablaPersonajes" class="d-none table table-striped table-hover align-middle mt-3 mb-0">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Casa</th>
+                                <th class="text-center">Año de Nacimiento</th>
+                                <th>Especie</th>
+                                <th>Imagen</th>
+                                <th class="text-center">Marcar Favorito</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- BIENVENIDA -->
+        <div class="card mb-4 shadow-sm" id="sectionBienvenida">
+            <div class="card-body" id="cardSectionBienvenida">
+                <h1  class="h3 mb-3 border-bottom pb-2">
+                    Bienvenida
+                </h1>
+                <img src="imgs/spinner.gif" alt="spinner" id="spinner" class="d-none">
+                <p id="errorBienvenida" class="d-none text-danger">ERROR la API no se ha cargado como debería</p>
+                <!--Con JavaScript se cargarán 8 personajes, 2 de cada casa. -->
+            </div>
+            
+        </div>
+        <!-- FAVORITOS -->
+        <div class="card mb-4 shadow-sm" id="sectionFavoritos">
+            <div class="card-body">
+                <h1 class="h3 mb-3 border-bottom pb-2">
+                    Favoritos
+                </h1>
+                <p class="text-muted">
+                    La gestión de favoritos se implementará en breve.
+                </p>
+            </div>
+        </div>
+        <!-- ¿QUIÉNES SOMOS? -->
+        <div class="card mb-4 shadow-sm" id="sectionQuienesSomos">
+            <div class="card-body">
+                <h1 class="h3 mb-3 border-bottom pb-2">
+                    ¿Quiénes Somos?
+                </h1>
+                <p class="text-muted">
+                    La gestión de favoritos se implementará en breve.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-top">
+        <div class="container">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
+                <p class="mb-2 mb-md-0 text-body-secondary">
+                    © 2025 Desarrollo en Cliente · Alonso Almodóvar
+                </p>
+                <i class="bi bi-bootstrap fs-4 text-primary"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="js/seccionBuscador.js"></script>
+    <script src="js/seccionBienvenida.js"></script>
+
+
+    <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>
+
+</html>
