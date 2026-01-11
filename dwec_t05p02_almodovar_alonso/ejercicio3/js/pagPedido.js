@@ -1,14 +1,14 @@
 let htmlOriginal = "";
 let libroEncontrado = null;
 const compra = [null, null, []]; // TipoEnvio, Cliente, ListaLibros
+const tienda = Tienda.getInstancia("Badulaque");
+
 document.addEventListener('DOMContentLoaded', () => {
     htmlOriginal = document.querySelector("main").innerHTML;
     inicializarPagina();
 });
 
 function inicializarPagina() {
-    const tienda = Tienda.getInstancia("Badulaque");
-
     pintarTiposEnvio(tienda.mostrarTiposEnvio());
 
     compra[0] = null;
@@ -18,7 +18,7 @@ function inicializarPagina() {
     const formCliente = document.getElementById("formCliente");
     formCliente.addEventListener("submit", (e) => {
         e.preventDefault();
-        buscarCliente(formCliente, tienda);
+        buscarCliente(formCliente);
         formCliente.reset();
         formCliente.classList.remove("was-validated");
     });
@@ -35,7 +35,7 @@ function inicializarPagina() {
 
     const btnBuscarLibro = document.getElementById("btnBuscarLibro");
     btnBuscarLibro.addEventListener("click", () => {
-        buscarLibro(tienda);
+        buscarLibro();
     });
 
     const formOperacionLibro = document.getElementById("formOperacionLibro");
@@ -56,10 +56,15 @@ function inicializarPagina() {
         formEnvio.classList.remove("was-validated");
     });
 
+    const btnPagar = document.getElementById("btnPagarPedido");
+    btnPagar.addEventListener("click", () => {
+        enviarPedido();
+    });
+
     pintarResumen();
 }
 
-function buscarCliente(form, tienda) {
+function buscarCliente(form) {
     const inputDNI = document.getElementById("dni");
     const divInfoCliente = document.getElementById("infoClienteSeleccionado");
     const btnBuscarCliente = document.getElementById("btnBuscarCliente");
@@ -78,7 +83,7 @@ function buscarCliente(form, tienda) {
     pintarResumen();
 }
 
-function buscarLibro(tienda) {
+function buscarLibro() {
     const inputISBN = document.getElementById("isbn");
     const divAnadirLibro = document.getElementById("anadirLibro");
     const libro = tienda.buscarLibro(inputISBN.value.trim());
@@ -96,7 +101,6 @@ function buscarLibro(tienda) {
         } else {
             inputCant.max = 9999999;
         }
-        document.getElementById("btnAccordeonEnvio").disabled = false;
     } else {
         inputISBN.setCustomValidity("Ese ISBN no está registrado");
         document.getElementById("formOperacionLibro").classList.add("was-validated");
@@ -106,43 +110,57 @@ function buscarLibro(tienda) {
 }
 
 function anadirLibroALaLista() {
+    let soloEbooks = true;
     if (libroEncontrado != null) {
         const unidades = parseInt(document.getElementById("inputUnidades").value);
-
+        if (libroEncontrado instanceof LibroPapel) {
+            soloEbooks = false;
+        }
         compra[2].push({
             libro: libroEncontrado,
             cantidad: unidades
         });
-
-        console.log("Cesta de la compra:", compra);
-        document.getElementById("btnAccordeonEnvio").disabled = false;
+        if (!soloEbooks) {
+            document.getElementById("btnAccordeonEnvio").disabled = false;
+        }
 
         pintarResumen();
     }
 }
 
 function insertarTipoEnvio() {
-    let soloEbooks = true;
-
-    if (!soloEbooks) {
-        
+    const selectTipoEnvio = document.getElementById("selectTipoEnvio");
+    let envio = null;
+    for (const option of selectTipoEnvio.options) {
+        if (option.selected) {
+            envio = tienda.buscarEnvio(option.value);
+        }
     }
+    compra[0] = envio;
+
+    pintarResumen();
 }
 
 function pintarResumen() {
     const datosCliente = document.getElementById("datosCliente");
+    const datosEnvio = document.getElementById("datosEnvio");
     const resumenVacio = document.getElementById("resumenVacio");
     const tbody = document.querySelector("table tbody");
-    const tablaResumen = document.getElementById("tablaResumen")
+    const tablaResumen = document.getElementById("tablaResumen");
+    const btnPagar = document.getElementById("btnPagarPedido");
+    let soloEbooks = true;
     if (compra[1] != null) {
         resumenVacio.classList.add("d-none");
-        datosCliente.innerHTML = `${compra[1].nombre}`
+        datosCliente.innerHTML = `${compra[1].nombre}`;
     }
     if (compra[2].length > 0) {
         tablaResumen.classList.remove("d-none");
         tbody.innerHTML = "";
 
         compra[2].forEach(item => {
+            if (item.libro instanceof LibroPapel) {
+                soloEbooks = false;
+            }
             const fila = document.createElement("tr");
 
             const totalLinea = (item.libro.precio * item.cantidad).toFixed(2);
@@ -155,6 +173,30 @@ function pintarResumen() {
             tbody.appendChild(fila);
         });
     };
+
+    if (soloEbooks) {
+        const envio = tienda.buscarEnvio("Sin Envío");
+        compra[0] = envio;
+    }
+    if (compra[0] != null) {
+        datosEnvio.innerHTML = `${compra[0].nombre}`;
+        btnPagar.disabled = false;
+    }
+}
+
+function enviarPedido() {
+    let pagar = true;
+    for (const item of compra) {
+        if (item == null || item.length == 0) {
+            pagar = false;
+        }
+    }
+
+    if (pagar) {
+        const pedido = tienda.hacerPedidoPorCliente(compra);
+        console.log(pedido);
+        resetear();
+    }
 }
 
 function pintarTiposEnvio(tiposEnvios) {

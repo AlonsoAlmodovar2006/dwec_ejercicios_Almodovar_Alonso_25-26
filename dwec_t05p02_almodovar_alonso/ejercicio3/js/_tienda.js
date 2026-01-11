@@ -192,8 +192,6 @@ class Tienda {
 
     // pedirYCrearVariosClientes
 
-    // pedirYCrearTipoEnvio
-
     // pedirYCrearVariosTiposEnvio
 
     mostrarCatalogoLibrosDisponibles() {
@@ -210,7 +208,7 @@ class Tienda {
         } else {
             console.log("El titulo que indicas no existe o es un Ebook");
         }
-        return libro[0]
+        return libro[0];
     }
 
     notificacionesStockLibrosMinimo() {
@@ -228,7 +226,16 @@ class Tienda {
 
     // borrarCliente
 
-    // hacerPedidoPorCliente
+    hacerPedidoPorCliente(arrayDatos) {  // Orden --> TipoEnvio, Cliente, ListaLibros
+        const pedido = new Pedido(arrayDatos[1]);
+        arrayDatos[2].forEach(item => {
+            console.log(item);
+            pedido.insertarLibro(item.libro, item.cantidad);
+        });
+        pedido.establecerTipoEnvio(arrayDatos[0]);
+        pedido.calcularTotal();
+        return pedido;
+    }
 
     // mostrarPedidoPorID
 
@@ -259,6 +266,10 @@ class Tienda {
 
     buscarLibro(isbnLibro) {
         return this.libros.buscarLibroPorIsbn(isbnLibro);
+    }
+
+    buscarEnvio(nombreEnvio) {
+        return this.tiposEnvios.buscarTiposPorNombre(nombreEnvio);
     }
 }
 

@@ -130,7 +130,7 @@ class Pedido {
         return this.librosPedido.size > 0;
     }
 
-    mostrarDatosPedido(catalogoLibro) {
+    mostrarDatosPedido() {
         let tablaLibros = "";
         this.librosPedido.forEach((item) => {
             const tipo = (item.libro instanceof Ebook) ? "Ebook" : "Papel";
