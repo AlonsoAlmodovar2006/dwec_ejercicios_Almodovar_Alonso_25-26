@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             personajesAMostrar.push(primero, segundo)
         }
-        pintarCards(personajesAMostrar);
-        error.classList.add("d-none");
+        setTimeout(() => {
+            pintarCards(personajesAMostrar);
+            spinner.classList.add("d-none");
+        }, 2000);
     } else {
         error.classList.remove("d-none");
+        error.classList.add("d-none");
     }
-    spinner.classList.add("d-none");
 });
 
 async function cargarAPI() {

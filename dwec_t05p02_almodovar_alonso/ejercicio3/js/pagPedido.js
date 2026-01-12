@@ -99,7 +99,7 @@ function buscarLibro() {
             inputCant.max = 1;
             document.getElementById("tituloLibroSeleccionado").innerHTML += " (Ebook)";
         } else {
-            inputCant.max = 9999999;
+            inputCant.max = libro.stock;
         }
     } else {
         inputISBN.setCustomValidity("Ese ISBN no está registrado");
@@ -152,6 +152,7 @@ function pintarResumen() {
     if (compra[1] != null) {
         resumenVacio.classList.add("d-none");
         datosCliente.innerHTML = `${compra[1].nombre}`;
+        btnPagar.disabled = false;
     }
     if (compra[2].length > 0) {
         tablaResumen.classList.remove("d-none");
@@ -180,7 +181,6 @@ function pintarResumen() {
     }
     if (compra[0] != null) {
         datosEnvio.innerHTML = `${compra[0].nombre}`;
-        btnPagar.disabled = false;
     }
 }
 

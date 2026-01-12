@@ -57,17 +57,17 @@ function mostrarCards(cliente) {
         const h6 = document.createElement("h6");
         h6.innerHTML = `No hay Pedidos todavía`;
         divCards.appendChild(h6);
-    }
-    pedidos.forEach(pedido => {
-        const div = document.createElement("div");
-        let tipoEnvio = "";
-        if (pedido.tipoEnvioPedido == null) {
-            tipoEnvio = "Sin envío";
-        } else {
-            tipoEnvio = pedido.tipoEnvioPedido.nombre;
-        }
-        div.innerHTML =
-            `<div class="card shadow-sm">
+    } else {
+        pedidos.listadoPedidos.forEach(pedido => {
+            const div = document.createElement("div");
+            let tipoEnvio = "";
+            if (pedido.tipoEnvioPedido == null) {
+                tipoEnvio = "Sin envío";
+            } else {
+                tipoEnvio = pedido.tipoEnvioPedido.nombre;
+            }
+            div.innerHTML =
+                `<div class="card shadow-sm">
                 <div class="card-body">
                     <h6 class="card-title">Pedido ${pedido.id} - ${pedido.fecha.toLocaleDateString("es-ES")}</h6>
                         <p class="card-text text-muted">
@@ -78,6 +78,7 @@ function mostrarCards(cliente) {
                         </p>
                 </div>
             </div>`
-        divCards.appendChild(div);
-    })
+            divCards.appendChild(div);
+        })
+    }
 }
